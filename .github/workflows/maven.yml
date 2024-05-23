@@ -11,7 +11,6 @@ name: Java CI with Maven
 on:
   push:
     branches: 
-      - main
       - feature/test-product-model
       - feature/test-product-repository
       - feature/test-product-service
