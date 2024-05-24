@@ -10,30 +10,41 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: 
+    branches:
       - feature/test-product-model
       - feature/test-product-repository
       - feature/test-product-service
   pull_request:
-    branches: 
-      - main
+    branches:
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 22
-      uses: actions/setup-java@v3
-      with:
-        java-version: '22'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: Run unit tests
-      run: mvn test
-    - name: Run integration tests
-      run: mvn verify
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 22
+        uses: actions/setup-java@v3
+        with:
+          java-version: '22'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Install ChromeDriver
+        run: |
+          wget https://storage.googleapis.com/chrome-for-testing-public/121.0.6167.184/linux64/chromedriver-linux64.zip
+          unzip chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Run unit tests
+        run: mvn test
+
+      - name: Run system/acceptance tests with Selenium and Cucumber
+        run: mvn test -Dcucumber.filter.tags="@acceptance" -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
+
