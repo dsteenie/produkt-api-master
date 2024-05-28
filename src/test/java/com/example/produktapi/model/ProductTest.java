@@ -19,7 +19,7 @@ public class ProductTest {
         @Test
     @DisplayName("Correct Description") //Natalia Molina
     void testGetDescription () {
-            Assertions.assertEquals("descriptionTest", product.getDescription());
+        Assertions.assertEquals("descriptionTest", product.getDescription());
     }
 
     @Test
