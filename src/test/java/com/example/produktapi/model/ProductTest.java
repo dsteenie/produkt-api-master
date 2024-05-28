@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 public class ProductTest {
 
- //Enhetstester av Product Description
+ //Enhetstester av Product - Description
     Product product;
 
-        @BeforeEach //This will run before each test - Natalia Molina
+        @BeforeEach //This will run before each test, övriga i teamet: ni kan använda produktvärden nedan för egna tester om ni vill - Natalia Molina
         void beforeTest(){
             System.out.println("Run Test");
             product = new Product ("titleTest", 1000d, "categoryTest", "descriptionTest", "imageTest.jpg");
