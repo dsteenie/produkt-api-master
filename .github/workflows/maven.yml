@@ -6,14 +6,18 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+#Created by Deborah S
+
 name: Java CI with Maven
 
 on:
   push:
     branches:
-      - feature/test-product-model
-      - feature/test-product-repository
-      - feature/test-product-service
+        - feature/test-deborah
+        - feature/test-product-natalia
+        - feature/test-product-pierre
+        - feature/test-product-jonas
+        - feature/test-product-ali
   pull_request:
     branches:
       - master
