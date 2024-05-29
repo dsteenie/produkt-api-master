@@ -41,5 +41,18 @@ public class ProductTest {
         product.setDescription("descriptionTestChanged");
         assertEquals("descriptionTestChanged", product.getDescription());
     }
+
+    @Test
+    @DisplayName("get price") //Jonas Nygren
+    void testGetPrise(){
+        assertEquals(100.0, product.getPrice());
+}
+
+    @Test
+    @DisplayName("Set price") //Jonas Nygren
+    void testSetPrise(){
+        product.setPrice(100.2);
+        assertEquals(100.2, product.getPrice());
+    }
 }
 
