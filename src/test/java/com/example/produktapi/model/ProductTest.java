@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductTest {
 
     private Product product;
-
     static class Product {
         private Integer id;
         private String imageUrl;
         private String description;
         private double price;
+        private String title;
         public Product(String imageUrl) {
             this.imageUrl = imageUrl;
         }
@@ -29,7 +29,8 @@ public class ProductTest {
 
         public double getPrice() { return price; }
         public void setPrice(Double price) { this.price = price; }
-
+        public String getTitle() { return title; }
+        public void setTitle(String title) { this.title = title; }
     }
 
     @BeforeEach
@@ -90,4 +91,18 @@ public class ProductTest {
         product.setPrice(100.2);
         assertEquals(100.2, product.getPrice());
     }
+    @Test
+    @DisplayName("check the get title")
+    void checkGetTitle() {
+        assertNull(product.getTitle());
+    }
+
+    @Test
+    @DisplayName("check the set title")
+    public void checkSetTitle() {
+        product.setTitle("Mens Cotton Jacket");
+
+        assertEquals("Mens Cotton Jacket", product.getTitle());
+    }
+
 }
