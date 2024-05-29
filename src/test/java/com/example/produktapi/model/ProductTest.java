@@ -1,32 +1,44 @@
 package com.example.produktapi.model;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class ProductTest {
 
- //Enhetstester av Product - Description
-    Product product;
+    private Product product;
 
-        @BeforeEach //This will run before each test, övriga i teamet: ni kan använda produktvärden nedan för egna tester om ni vill - Natalia Molina
-        void beforeTest(){
-            System.out.println("Run Test");
-            product = new Product ("titleTest", 1000d, "categoryTest", "descriptionTest", "imageTest.jpg");
-        }
+    @BeforeEach
+    public void setUp() {
+        product = new Product("Test Product", 100.0, "Test Category", "Test Description", "Test Image");
+    }
+
+    @Test //Deborah S
+    @DisplayName("Test Get ID")
+    public void testGetId() {
+        assertNull(product.getId());
+    }
+
+    @Test //Deborah S
+    @DisplayName("Test Set ID")
+    public void testSetId() {
+        product.setId(100);
+        assertEquals(100, product.getId());
+    }
 
         @Test
     @DisplayName("Correct Description") //Natalia Molina
     void testGetDescription () {
-        Assertions.assertEquals("descriptionTest", product.getDescription());
+        assertEquals("Test Description", product.getDescription());
     }
 
     @Test
     @DisplayName("Change Description") //Natalia Molina
     void testGetDescription2 () {
         product.setDescription("descriptionTestChanged");
-        Assertions.assertEquals("descriptionTestChanged", product.getDescription());
+        assertEquals("descriptionTestChanged", product.getDescription());
     }
 }
 
