@@ -4,7 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ProductTest {
 
@@ -14,7 +15,7 @@ public class ProductTest {
     public void setUp() {
         product = new Product("Test Product", 100.0, "Test Category", "Test Description", "Test Image");
     }
-
+  
     @Test //Deborah S
     @DisplayName("Test Get ID")
     public void testGetId() {
@@ -27,6 +28,18 @@ public class ProductTest {
         product.setId(100);
         assertEquals(100, product.getId());
     }
-}
 
+        @Test
+    @DisplayName("Correct Description") //Natalia Molina
+    void testGetDescription () {
+        assertEquals("Test Description", product.getDescription());
+    }
+
+    @Test
+    @DisplayName("Change Description") //Natalia Molina
+    void testGetDescription2 () {
+        product.setDescription("descriptionTestChanged");
+        assertEquals("descriptionTestChanged", product.getDescription());
+    }
+}
 
