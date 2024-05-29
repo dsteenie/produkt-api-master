@@ -15,7 +15,7 @@ public class ProductTest {
     public void setUp() {
         product = new Product("Test Product", 100.0, "Test Category", "Test Description", "Test Image");
     }
-
+  
     @Test //Deborah S
     @DisplayName("Test Get ID")
     public void testGetId() {
