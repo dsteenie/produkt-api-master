@@ -13,7 +13,7 @@ public class ProductTest {
         private Integer id;
         private String imageUrl;
         private String description;
-
+        private double price;
         public Product(String imageUrl) {
             this.imageUrl = imageUrl;
         }
@@ -26,12 +26,17 @@ public class ProductTest {
 
         public String getDescription() { return description; }
         public void setDescription(String description) { this.description = description; }
+
+        public double getPrice() { return price; }
+        public void setPrice(Double price) { this.price = price; }
+
     }
 
     @BeforeEach
     public void setUp() {
         product = new Product("Test Image");
         product.setDescription("Test Description");
+        product.setPrice(12.2);
     }
 
     @Test //Deborah S
@@ -71,5 +76,18 @@ public class ProductTest {
     void testGetDescription2 () {
         product.setDescription("descriptionTestChanged");
         assertEquals("descriptionTestChanged", product.getDescription());
+    }
+
+    @Test
+    @DisplayName("get price") //Jonas Nygren
+    void testGetPrice(){
+        assertEquals(12.2, product.getPrice());
+}
+
+    @Test
+    @DisplayName("Set price") //Jonas Nygren
+    void testSetPrice(){
+        product.setPrice(100.2);
+        assertEquals(100.2, product.getPrice());
     }
 }
