@@ -40,6 +40,5 @@ public class ProductTest {
         product.setDescription("descriptionTestChanged");
         assertEquals("descriptionTestChanged", product.getDescription());
     }
-
 }
 
