@@ -44,13 +44,13 @@ public class ProductTest {
 
     @Test
     @DisplayName("get price") //Jonas Nygren
-    void testGetPrise(){
+    void testGetPrice(){
         assertEquals(100.0, product.getPrice());
 }
 
     @Test
     @DisplayName("Set price") //Jonas Nygren
-    void testSetPrise(){
+    void testSetPrice(){
         product.setPrice(100.2);
         assertEquals(100.2, product.getPrice());
     }
