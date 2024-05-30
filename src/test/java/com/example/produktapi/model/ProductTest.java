@@ -8,12 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductTest {
 
     private Product product;
+
     static class Product {
         private Integer id;
         private String imageUrl;
         private String description;
         private double price;
         private String title;
+
         public Product(String imageUrl) {
             this.imageUrl = imageUrl;
         }
@@ -29,6 +31,7 @@ public class ProductTest {
 
         public double getPrice() { return price; }
         public void setPrice(Double price) { this.price = price; }
+
         public String getTitle() { return title; }
         public void setTitle(String title) { this.title = title; }
     }
@@ -40,26 +43,26 @@ public class ProductTest {
         product.setPrice(12.2);
     }
 
-    @Test //Deborah S
+    @Test //Deborah Steenie
     @DisplayName("Test Get ID")
     public void testGetId() {
         assertNull(product.getId());
     }
 
-    @Test //Deborah S
+    @Test //Deborah Steenie
     @DisplayName("Test Set ID")
     public void testSetId() {
         product.setId(100);
         assertEquals(100, product.getId());
     }
 
-    @Test //Pierre
+    @Test //Pierre Nilsson
     @DisplayName("Test Get Image URL")
     public void testGetImageUrl() {
         assertEquals("Test Image", product.getImageUrl());
     }
 
-    @Test //Pierre
+    @Test //Pierre Nilsson
     @DisplayName("Test Set Image URL")
     public void testSetImageUrl() {
         product.setImageUrl("http://example.com/image.jpg");
@@ -79,25 +82,26 @@ public class ProductTest {
         assertEquals("descriptionTestChanged", product.getDescription());
     }
 
-    @Test
-    @DisplayName("get price") //Jonas Nygren
+    @Test //Jonas Nygren
+    @DisplayName("get price")
     void testGetPrice(){
         assertEquals(12.2, product.getPrice());
 }
 
-    @Test
-    @DisplayName("Set price") //Jonas Nygren
+    @Test //Jonas Nygren
+    @DisplayName("Set price")
     void testSetPrice(){
         product.setPrice(100.2);
         assertEquals(100.2, product.getPrice());
     }
-    @Test
+
+    @Test //Ali Kazem Mahdy
     @DisplayName("check the get title")
     void checkGetTitle() {
         assertNull(product.getTitle());
     }
 
-    @Test
+    @Test //Ali Kazem Mahdy
     @DisplayName("check the set title")
     public void checkSetTitle() {
         product.setTitle("Mens Cotton Jacket");
