@@ -49,6 +49,7 @@ public class StepDefinition {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app");
     }
 
+    //Homepage title - Natalia
     @Then("title is {string}") //Natalia
     public void title_is(String expectedTitle) {
         String actualTitle = driver.getTitle();
