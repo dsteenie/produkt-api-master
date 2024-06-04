@@ -80,4 +80,32 @@ public class StepDefinition {
         assertNotNull(productDescription, "Expected description: " + expectedDescription + " not found.");
     }
 
+    //Footer elements - Pierre
+    @Then("the footer section should contain the text {string}")
+    public void the_footer_section_should_contain_the_text(String expectedText) {
+        WebElement footerText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("footer p.col-md-4.mb-0.text-muted")));
+        String actualText = footerText.getText();
+        Assertions.assertEquals(expectedText, actualText, "Footer text does not match.");
+    }
+
+    @Then("the footer section should contain a link with text {string} and URL {string}")
+    public void the_footer_section_should_contain_a_link_with_text_and_URL(String linkText, String expectedUrl) {
+        WebElement footerLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(linkText)));
+        String actualUrl = footerLink.getAttribute("href");
+        Assertions.assertTrue(actualUrl.contains(expectedUrl), "Footer link URL does not match.");
+    }
+
+    @Then("the footer section should contain a link with text {string} and a blank URL {string}")
+    public void the_footer_section_should_contain_a_link_with_text_and_a_blank_URL(String linkText, String expectedUrl) {
+        WebElement footerLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(linkText)));
+        String actualUrl = footerLink.getAttribute("href");
+        String baseUrl = "https://webshop-agil-testautomatiserare.netlify.app";
+        String relativeUrl = actualUrl.replace(baseUrl, "");
+        if (expectedUrl.equals("#")) {
+            Assertions.assertTrue(relativeUrl.equals("#") || relativeUrl.equals("/#"), "Footer link URL does not match.");
+        } else {
+            Assertions.assertEquals(expectedUrl, relativeUrl, "Footer link URL does not match.");
+        }
+    }
+
 }
