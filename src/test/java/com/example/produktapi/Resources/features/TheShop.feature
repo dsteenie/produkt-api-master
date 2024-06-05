@@ -25,3 +25,16 @@ Feature: The Shop
     And the footer section should contain a link with text "Shop" and URL "/products"
     And the footer section should contain a link with text "Checkout" and URL "/checkout"
     And the footer section should contain a link with text "About" and a blank URL "#"
+
+      ## Go to Shop page - Natalia
+  @acceptance
+  Scenario: Shop link in Top menu leads to product catalogue
+    When I click on shop link
+    Then Shop page is shown
+
+     ## Filter all products in Shop Page - Natalia
+  @acceptance
+  Scenario: Selection All shows all products
+    Given I am on Shop page
+    When I click on All
+    Then I see all products
