@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -108,4 +109,34 @@ public class StepDefinition {
         }
     }
 
+    //Navigation to and inside Shop Page - Natalia
+
+    @When("I click on shop link")
+    public void I_click_on_shop_link() {
+        driver.findElement(By.xpath("//a[@href='/products']")).click();
+    }
+
+    @Then("Shop page is shown")
+    public void Shop_page_is_shown() {
+        String websiteUrl = driver.getCurrentUrl();
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products", websiteUrl);
+    }
+
+    @Given("I am on Shop page")
+    public void i_am_on_Shop_page() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
+    }
+
+    @When("I click on All")
+    public void i_click_on_All() {
+        driver.findElement(By.xpath("//*/a[text()='All']")).click();
+    }
+
+    @Then("I see all products")
+    public void i_see_all_products() throws InterruptedException {
+        Thread.sleep(5000);
+        List<WebElement> productCards = driver.findElements(By.xpath("//main/div/div/img"));
+        int numberOfProductElements = productCards.size();
+        Assertions.assertEquals(40, numberOfProductElements); /*I will revise this assertion in next sprint. source kod in browser shows 20 items but I see 40 when code is downloaded*/
+    }
 }
