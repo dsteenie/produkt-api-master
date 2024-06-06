@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -139,4 +140,35 @@ public class StepDefinition {
         int numberOfProductElements = productCards.size();
         Assertions.assertEquals(40, numberOfProductElements); /*I will revise this assertion in next sprint. source kod in browser shows 20 items but I see 40 when code is downloaded*/
     }
+
+    //add item to cart and check it-Ali Kazem Mahdy
+    @When("I navigate to the shop")
+    public void i_navigate_to_the_shop() {
+        driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(2) > a")).click();
+
+    }
+    @When("I add Mens Cotton Jacket to the cart")
+    public void i_add_mens_cotton_jacket_to_the_cart() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement addtocart = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/main/div[3]/div/div/button")));
+        Actions addToCardBotton = new Actions(driver);
+        addToCardBotton.moveToElement(addtocart).click().perform();
+
+    }
+    @Then("I should see the product in the cart")
+    public void i_should_see_the_product_in_the_cart() {
+        WebElement checkOut = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/header/div/div/div/a")));
+        String checkOutUrl = checkOut.getAttribute("href");
+        driver.get(checkOutUrl);
+
+    }
+    @Then("the cart should have the item")
+    public void the_cart_should_have_the_item() {
+        WebElement cartCount = driver.findElement(By.xpath("//html/body/main/div[2]/div[1]/h4/span[2]"));
+        String cartItemCount = cartCount.getText();
+        Assertions.assertEquals(cartItemCount,"1");
+
+    }
+
+
 }

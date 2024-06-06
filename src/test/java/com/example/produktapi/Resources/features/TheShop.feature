@@ -38,3 +38,11 @@ Feature: The Shop
     Given I am on Shop page
     When I click on All
     Then I see all products
+
+   ##add item to cart and check it-Ali Kazem Mahdy
+  Scenario: Add a single product to the cart
+    Given I am on the homepage
+    When I navigate to the shop
+    And I add Mens Cotton Jacket to the cart
+    Then I should see the product in the cart
+    And the cart should have the item
