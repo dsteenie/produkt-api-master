@@ -40,6 +40,7 @@ Feature: The Shop
     Then I see all products
 
    ##add item to cart and check it-Ali Kazem Mahdy
+  @acceptance
   Scenario: Add a single product to the cart
     Given I am on the homepage
     When I navigate to the shop
