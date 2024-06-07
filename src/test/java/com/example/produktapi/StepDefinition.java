@@ -167,8 +167,41 @@ public class StepDefinition {
         WebElement cartCount = driver.findElement(By.xpath("//html/body/main/div[2]/div[1]/h4/span[2]"));
         String cartItemCount = cartCount.getText();
         Assertions.assertEquals(cartItemCount,"1");
-
     }
 
+    @When("I click on home") //Jonas Nygren
+    public void iClickOnHome() {
+        WebElement homeNav = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li:nth-child(1)")));
+        homeNav.click();
+    }
 
+    @Then("I should have navigated go to home") //Jonas Nygren
+    public void iShouldGoToHome() {
+        String url = driver.getCurrentUrl();
+        Assertions.assertEquals("expectedUrl", url, "URL does not match");
+    }
+
+    @When("I click on Shop")//Jonas Nygren
+    public void iClickOnShop() {
+        WebElement shopNav = driver.findElement(By.cssSelector("header div div ul li:nth-child(2)"));
+        shopNav.click();
+    }
+
+    @Then("I should have navigated go to shop")//Jonas Nygren
+    public void iShouldGoToShop() {
+        String url = driver.getCurrentUrl();
+        Assertions.assertEquals("expectedUrl", url, "URL does not match");
+    }
+
+    @When("I click on checkout")//Jonas Nygren
+    public void iClickOnCheckout() {
+        WebElement checkoutNav = driver.findElement(By.cssSelector("body header div div div a"));
+        checkoutNav.click();
+    }
+
+    @Then("I should have navigated go to checkout page")//Jonas Nygren
+    public void iShouldGoToCheckoutPage() {
+        String url = driver.getCurrentUrl();
+        Assertions.assertEquals("expectedUrl", url, "URL does not match");
+    }
 }
