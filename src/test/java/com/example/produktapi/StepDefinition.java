@@ -183,7 +183,7 @@ public class StepDefinition {
 
     @When("I click on Shop")//Jonas Nygren
     public void iClickOnShop() {
-        WebElement shopNav = driver.findElement(By.cssSelector("header div div ul li:nth-child(2)"));
+        WebElement shopNav = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("header div div ul li:nth-child(2)")));
         shopNav.click();
     }
 
@@ -195,7 +195,7 @@ public class StepDefinition {
 
     @When("I click on checkout")//Jonas Nygren
     public void iClickOnCheckout() {
-        WebElement checkoutNav = driver.findElement(By.cssSelector("body header div div div a"));
+        WebElement checkoutNav = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body header div div div a")));
         checkoutNav.click();
     }
 
