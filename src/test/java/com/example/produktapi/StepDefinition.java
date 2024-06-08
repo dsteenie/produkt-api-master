@@ -178,7 +178,7 @@ public class StepDefinition {
     @Then("I should have navigated go to home") //Jonas Nygren
     public void iShouldGoToHome() {
         String url = driver.getCurrentUrl();
-        Assertions.assertEquals("expectedUrl", url, "URL does not match");
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/", url, "URL does not match");
     }
 
     @When("I click on Shop")//Jonas Nygren
@@ -190,7 +190,7 @@ public class StepDefinition {
     @Then("I should have navigated go to shop")//Jonas Nygren
     public void iShouldGoToShop() {
         String url = driver.getCurrentUrl();
-        Assertions.assertEquals("expectedUrl", url, "URL does not match");
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products", url, "URL does not match");
     }
 
     @When("I click on checkout")//Jonas Nygren
@@ -202,6 +202,6 @@ public class StepDefinition {
     @Then("I should have navigated go to checkout page")//Jonas Nygren
     public void iShouldGoToCheckoutPage() {
         String url = driver.getCurrentUrl();
-        Assertions.assertEquals("expectedUrl", url, "URL does not match");
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", url, "URL does not match");
     }
 }
