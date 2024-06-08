@@ -47,3 +47,14 @@ Feature: The Shop
     And I add Mens Cotton Jacket to the cart
     Then I should see the product in the cart
     And the cart should have the item
+
+    ##navigation -Jonas Nygren
+  @acceptance
+  Scenario: Verify navigation elements
+    Given I am on the homepage
+    When I click on home
+    Then I should have navigated go to home
+    When I click on Shop
+    Then I should have navigated go to shop
+    When I click on checkout
+    Then I should have navigated go to checkout page
