@@ -110,37 +110,6 @@ public class StepDefinition {
         }
     }
 
-    //Navigation to and inside Shop Page - Natalia
-
-    @When("I click on shop link")
-    public void I_click_on_shop_link() {
-        driver.findElement(By.xpath("//a[@href='/products']")).click();
-    }
-
-    @Then("Shop page is shown")
-    public void Shop_page_is_shown() {
-        String websiteUrl = driver.getCurrentUrl();
-        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products", websiteUrl);
-    }
-
-    @Given("I am on Shop page")
-    public void i_am_on_Shop_page() {
-        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
-    }
-
-    @When("I click on All")
-    public void i_click_on_All() {
-        driver.findElement(By.xpath("//*/a[text()='All']")).click();
-    }
-
-    @Then("I see all products")
-    public void i_see_all_products() throws InterruptedException {
-        Thread.sleep(5000);
-        List<WebElement> productCards = driver.findElements(By.xpath("//main/div/div/img"));
-        int numberOfProductElements = productCards.size();
-        Assertions.assertEquals(40, numberOfProductElements); /*I will revise this assertion in next sprint. source kod in browser shows 20 items but I see 40 when code is downloaded*/
-    }
-
     //add item to cart and check it-Ali Kazem Mahdy
     @When("I navigate to the shop")
     public void i_navigate_to_the_shop() {
@@ -203,5 +172,120 @@ public class StepDefinition {
     public void iShouldGoToCheckoutPage() {
         String url = driver.getCurrentUrl();
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", url, "URL does not match");
+    }
+
+    //Navigation to and inside Shop Page - Natalia
+
+    @When("I click on shop link")
+    public void I_click_on_shop_link() {
+        driver.findElement(By.xpath("//a[@href='/products']")).click();
+    }
+
+    @Then("Shop page is shown")
+    public void Shop_page_is_shown() {
+        String websiteUrl = driver.getCurrentUrl();
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products", websiteUrl);
+    }
+
+    @Given("I am on Shop page")
+    public void i_am_on_Shop_page() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
+    }
+
+    @When("I click on All")
+    public void i_click_on_All() {
+        driver.findElement(By.xpath("//*/a[text()='All']")).click();
+    }
+
+    @Then("I see all products")
+    public void i_see_all_products() throws InterruptedException {
+        Thread.sleep(5000);
+        List<WebElement> productCards = driver.findElements(By.xpath("//main/div/div/img"));
+        int numberOfProductElements = productCards.size();
+        Assertions.assertEquals(40, numberOfProductElements); /*I will revise this assertion in next sprint. source kod in browser shows 20 items but I see 40 when code is downloaded*/
+    }
+
+    @Given("I am on Shop page1")
+    public void i_am_on_Shop_page1() throws InterruptedException {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
+        Thread.sleep(5000);
+    }
+
+    @When("I click on Mens clothing")
+    public void i_click_on_mens_clothing() throws InterruptedException {
+        driver.findElement(By.xpath("//*/a[text()=\"Men's clothing\"]")).click();
+        Thread.sleep(5000);
+    }
+
+    @Then("I see all products in Mens")
+    public void i_see_all_products_in_Mens() throws InterruptedException {
+        Thread.sleep(5000);
+        List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
+        for (WebElement button : productCardButtons) {
+            Assertions.assertTrue(button.getDomAttribute("onclick").contains("\"category\":\"mens clothing\""));
+        }
+    }
+
+    @Given("I am on Shop page2")
+    public void i_am_on_Shop_page2() throws InterruptedException {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
+        Thread.sleep(5000);
+    }
+
+    @When("I click on Womens clothing")
+    public void i_click_on_Womens_clothing() throws InterruptedException {
+        driver.findElement(By.xpath("//*/a[text()=\"Women's clothing\"]")).click();
+        Thread.sleep(5000);
+    }
+
+    @Then("I see all products in Womens")
+    public void i_see_all_products_in_Womens() throws InterruptedException {
+        Thread.sleep(5000);
+        List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
+        for (WebElement button : productCardButtons) {
+            Assertions.assertTrue(button.getDomAttribute("onclick").contains("\"category\":\"womens clothing\""));
+        }
+    }
+
+    @Given("I am on Shop page3")
+    public void i_am_on_Shop_page3() throws InterruptedException {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
+        Thread.sleep(5000);
+    }
+
+    @When("I click on Jewelery")
+    public void i_click_on_jewelery() throws InterruptedException {
+        driver.findElement(By.xpath("//*/a[text()=\"Jewelery\"]")).click();
+        Thread.sleep(5000);
+    }
+
+    @Then("I see all products in Jewelery")
+    public void i_see_all_products_in_Jewelery() throws InterruptedException {
+        Thread.sleep(5000);
+        List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
+        for (WebElement button : productCardButtons) {
+            Assertions.assertTrue(button.getDomAttribute("onclick").contains("\"category\":\"jewelery\""));
+        }
+    }
+
+    @Given("I am on Shop page4")
+    public void i_am_on_Shop_page4() throws InterruptedException {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
+        Thread.sleep(5000);
+    }
+
+    @When("I click on Electronics")
+    public void i_click_on_Electronics() throws InterruptedException {
+        driver.findElement(By.xpath("//*/a[text()=\"Electronics\"]")).click();
+        Thread.sleep(5000);
+    }
+
+    @Then("I see all products in Electronics")
+    public void i_see_all_products_in_Electronics() throws InterruptedException {
+        Thread.sleep(5000);
+        List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
+        for (WebElement button : productCardButtons) {
+            Assertions.assertTrue(button.getDomAttribute("onclick").contains("\"category\":\"electronics\""));
+        }
     }
 }

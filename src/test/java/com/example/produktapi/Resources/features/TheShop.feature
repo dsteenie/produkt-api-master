@@ -32,13 +32,6 @@ Feature: The Shop
     When I click on shop link
     Then Shop page is shown
 
-     ## Filter all products in Shop Page - Natalia
-  @acceptance
-  Scenario: Selection All shows all products
-    Given I am on Shop page
-    When I click on All
-    Then I see all products
-
    ##add item to cart and check it-Ali Kazem Mahdy
   @acceptance
   Scenario: Add a single product to the cart
@@ -58,3 +51,39 @@ Feature: The Shop
     Then I should have navigated go to shop
     When I click on checkout
     Then I should have navigated go to checkout page
+
+    ##Navigation to and inside Shop page - Natalia Molina
+  @acceptance
+  Scenario: Go to Shop page
+    When I click on shop link
+    Then Shop page is shown
+
+  @acceptance
+  Scenario: Filter all products
+    Given I am on Shop page
+    When I click on All
+    Then I see all products
+
+  @acceptance
+  Scenario: Filter Men´s clothing
+    Given I am on Shop page1
+    When I click on Mens clothing
+    Then I see all products in Mens
+
+  @acceptance
+  Scenario: Filter Women´s clothing
+    Given I am on Shop page2
+    When I click on Womens clothing
+    Then I see all products in Womens
+
+  @acceptance
+  Scenario: Filter Jewelery
+    Given I am on Shop page3
+    When I click on Jewelery
+    Then I see all products in Jewelery
+
+  @acceptance
+  Scenario: Filter Electronics
+    Given I am on Shop page4
+    When I click on Electronics
+    Then I see all products in Electronics
