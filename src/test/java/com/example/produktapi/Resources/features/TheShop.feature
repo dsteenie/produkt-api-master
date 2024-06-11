@@ -20,11 +20,11 @@ Feature: The Shop
       ##Footer elements - Pierre Nilsson
   @acceptance
   Scenario: Verify footer elements
-    Then the footer section should contain the text "© 2023 The Shop"
+    Then the footer section should contain the text "© 2024 The Shop"
     And the footer section should contain a link with text "Home" and URL "/"
     And the footer section should contain a link with text "Shop" and URL "/products"
     And the footer section should contain a link with text "Checkout" and URL "/checkout"
-    And the footer section should contain a link with text "About" and a blank URL "#"
+    And the footer section should contain a link with text "About" and a blank URL "/about"
 
    ##add item to cart and check it-Ali Kazem Mahdy
   @acceptance
