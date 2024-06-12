@@ -174,9 +174,9 @@ public class StepDefinition {
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", url, "URL does not match");
     }
 
-    //Navigation to and inside Shop Page - Natalia
+    //Navigation from Home to Shop Page
 
-    @When("I click on shop link")
+   /*@When("I click on shop link") Natalia: I commented out since there is already a test of this menu above by JN
     public void I_click_on_shop_link() {
         driver.findElement(By.xpath("//a[@href='/products']")).click();
     }
@@ -185,19 +185,32 @@ public class StepDefinition {
     public void Shop_page_is_shown() {
         String websiteUrl = driver.getCurrentUrl();
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products", websiteUrl);
+    }*/
+
+    @When("I click on button All products") //Natalia
+    public void i_click_on_button_all_products() {
+        driver.findElement(By.xpath("//*/button[text()='All products']")).click();
     }
 
-    @Given("I am on Shop page")
+    @Then("I see Shop page") //Natalia
+    public void i_see_shop_page() {
+        String websiteUrl = driver.getCurrentUrl();
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products.html", websiteUrl);
+    }
+
+    //Shop Page filtering menu - Natalia
+
+    @Given("I am on Shop page") //Natalia
     public void i_am_on_Shop_page() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
     }
 
-    @When("I click on All")
+    @When("I click on All") //Natalia
     public void i_click_on_All() {
         driver.findElement(By.xpath("//*/a[text()='All']")).click();
     }
 
-    @Then("I see all products")
+    @Then("I see all products") //Natalia
     public void i_see_all_products() throws InterruptedException {
         Thread.sleep(5000);
         List<WebElement> productCards = driver.findElements(By.xpath("//main/div/div/img"));
@@ -205,19 +218,19 @@ public class StepDefinition {
         Assertions.assertEquals(40, numberOfProductElements); /*I will revise this assertion in next sprint. source kod in browser shows 20 items but I see 40 when code is downloaded*/
     }
 
-    @Given("I am on Shop page1")
+    @Given("I am on Shop page1") //Natalia
     public void i_am_on_Shop_page1() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
         Thread.sleep(5000);
     }
 
-    @When("I click on Mens clothing")
+    @When("I click on Mens clothing") //Natalia
     public void i_click_on_mens_clothing() throws InterruptedException {
         driver.findElement(By.xpath("//*/a[text()=\"Men's clothing\"]")).click();
         Thread.sleep(5000);
     }
 
-    @Then("I see all products in Mens")
+    @Then("I see all products in Mens") //Natalia
     public void i_see_all_products_in_Mens() throws InterruptedException {
         Thread.sleep(5000);
         List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
@@ -226,19 +239,19 @@ public class StepDefinition {
         }
     }
 
-    @Given("I am on Shop page2")
+    @Given("I am on Shop page2") //Natalia
     public void i_am_on_Shop_page2() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
         Thread.sleep(5000);
     }
 
-    @When("I click on Womens clothing")
+    @When("I click on Womens clothing") //Natalia
     public void i_click_on_Womens_clothing() throws InterruptedException {
         driver.findElement(By.xpath("//*/a[text()=\"Women's clothing\"]")).click();
         Thread.sleep(5000);
     }
 
-    @Then("I see all products in Womens")
+    @Then("I see all products in Womens") //Natalia
     public void i_see_all_products_in_Womens() throws InterruptedException {
         Thread.sleep(5000);
         List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
@@ -247,7 +260,7 @@ public class StepDefinition {
         }
     }
 
-    @Given("I am on Shop page3")
+    @Given("I am on Shop page3") //Natalia
     public void i_am_on_Shop_page3() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
         Thread.sleep(5000);
@@ -259,7 +272,7 @@ public class StepDefinition {
         Thread.sleep(5000);
     }
 
-    @Then("I see all products in Jewelery")
+    @Then("I see all products in Jewelery") //Natalia
     public void i_see_all_products_in_Jewelery() throws InterruptedException {
         Thread.sleep(5000);
         List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
@@ -268,19 +281,19 @@ public class StepDefinition {
         }
     }
 
-    @Given("I am on Shop page4")
+    @Given("I am on Shop page4") //Natalia
     public void i_am_on_Shop_page4() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
         Thread.sleep(5000);
     }
 
-    @When("I click on Electronics")
+    @When("I click on Electronics") //Natalia
     public void i_click_on_Electronics() throws InterruptedException {
         driver.findElement(By.xpath("//*/a[text()=\"Electronics\"]")).click();
         Thread.sleep(5000);
     }
 
-    @Then("I see all products in Electronics")
+    @Then("I see all products in Electronics") //Natalia
     public void i_see_all_products_in_Electronics() throws InterruptedException {
         Thread.sleep(5000);
         List<WebElement> productCardButtons = driver.findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));

@@ -26,12 +26,6 @@ Feature: The Shop
     And the footer section should contain a link with text "Checkout" and URL "/checkout"
     And the footer section should contain a link with text "About" and a blank URL "/about"
 
-      ## Go to Shop page - Natalia
-  @acceptance
-  Scenario: Shop link in Top menu leads to product catalogue
-    When I click on shop link
-    Then Shop page is shown
-
    ##add item to cart and check it-Ali Kazem Mahdy
   @acceptance
   Scenario: Add a single product to the cart
@@ -52,11 +46,19 @@ Feature: The Shop
     When I click on checkout
     Then I should have navigated go to checkout page
 
-    ##Navigation to and inside Shop page - Natalia Molina
+         ## Navigation to Shop page - Natalia
+
+ ## @acceptance - I comment out since this test is already made by NM above
+ ## Scenario: Shop link in Top menu leads to product catalogue
+   ## When I click on shop link
+    ##Then Shop page is shown
+
   @acceptance
-  Scenario: Go to Shop page
-    When I click on shop link
-    Then Shop page is shown
+  Scenario: Button All products leads to Shop page
+    When I click on button All products
+    Then I see Shop page
+
+     ##Navigation inside Shop page - Natalia Molina
 
   @acceptance
   Scenario: Filter all products
