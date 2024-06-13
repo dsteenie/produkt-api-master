@@ -96,3 +96,9 @@ Feature: The Shop
     Then I have section should contain a heading with text "About The Shop"
     Then I Section have text with informative text
     Then I have button have text "To all products"
+
+    ##Presentation text on homepage - Deborah
+  @acceptance
+  Scenario: Verify updated presentation text on homepage
+    Then I should see the headline "This shop is all you need"
+    And I should see the description text "Welcome to The Shop, your premier online destination"
