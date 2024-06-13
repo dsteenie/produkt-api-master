@@ -116,6 +116,7 @@ public class StepDefinition {
         driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(2) > a")).click();
 
     }
+
     @When("I add Mens Cotton Jacket to the cart")
     public void i_add_mens_cotton_jacket_to_the_cart() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -124,6 +125,7 @@ public class StepDefinition {
         addToCardBotton.moveToElement(addtocart).click().perform();
 
     }
+
     @Then("I should see the product in the cart")
     public void i_should_see_the_product_in_the_cart() {
         WebElement checkOut = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/header/div/div/div/a")));
@@ -131,11 +133,12 @@ public class StepDefinition {
         driver.get(checkOutUrl);
 
     }
+
     @Then("the cart should have the item")
     public void the_cart_should_have_the_item() {
         WebElement cartCount = driver.findElement(By.xpath("//html/body/main/div[2]/div[1]/h4/span[2]"));
         String cartItemCount = cartCount.getText();
-        Assertions.assertEquals(cartItemCount,"1");
+        Assertions.assertEquals(cartItemCount, "1");
     }
 
     @When("I click on home") //Jonas Nygren
@@ -302,5 +305,34 @@ public class StepDefinition {
         }
     }
 
+    @Given("^I am on the about page$") //Jonas Nygren
+    public void iAmOnTheAboutPage() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/about");
+    }
 
+    @Then("I have section should contain a heading with text {string}")
+    public void iHaveSectionShouldContainAHeadingWithText(String arg0) {
+        WebElement aboutHeading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5  div  h2")));
+        Assertions.assertEquals(arg0, aboutHeading.getText());
+    }
+
+    @Then("I Section have text with informative text")
+    public void iSectionHaveTextWithInformativeText() {
+        WebElement aboutp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div p")));
+        Assertions.assertEquals("Welcome to The Shop, your premier online destination for all things fashion, electronics, and jewelry! At The Shop, we pride ourselves on offering a curated selection of high-quality products to cater to your diverse needs and desires.\n" +
+                "\n" +
+                "Explore our extensive range of fashion, featuring stylish attire for every occasion. Whether you're gearing up for a formal event or a laid-back weekend, we've got you covered with the latest trends and timeless classics.\n" +
+                "\n" +
+                "Tech enthusiasts will be delighted by our assortment of cutting-edge electronics, including smartphones, laptops, tablets, and accessories. Stay connected and ahead of the curve with the latest gadgets from top brands in the industry.\n" +
+                "\n" +
+                "Elevate your style with our stunning jewelry pieces, carefully crafted to add a touch of glamour to any outfit. From delicate necklaces and sparkling earrings to sleek watches and bold bracelets, our jewelry collection offers something for every personality and preference.\n" +
+                "\n" +
+                "At The Shop, we are dedicated to providing our customers with an exceptional shopping experience, from seamless navigation to prompt delivery and stellar customer service. Shop with confidence and discover the perfect blend of fashion, technology, and elegance at The Shop!", aboutp.getText());
+    }
+
+    @Then("I have button have text {string}")
+    public void iHaveButtonHaveText(String arg0) {
+        WebElement aboutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div div button")));
+        Assertions.assertEquals(arg0, aboutButton.getText());
+    }
 }
