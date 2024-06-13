@@ -338,7 +338,7 @@ public class StepDefinition {
 
     @Then("I navigate to products when click on button {string}")
     public void iNavigateToProductsWhenClickOnButton(String arg0) {
-        WebElement aboutButton = driver.findElement(By.cssSelector("body div.container.my-5 div div button"));
+        WebElement aboutButton = driver.findElement(By.xpath("/html/body/div[1]/div/div/button"));
         aboutButton.click();
         String url = driver.getCurrentUrl();
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products.html", url, "URL does not match");
