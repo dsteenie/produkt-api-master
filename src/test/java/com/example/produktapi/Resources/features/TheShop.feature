@@ -89,3 +89,10 @@ Feature: The Shop
     Given I am on Shop page4
     When I click on Electronics
     Then I see all products in Electronics
+
+  @acceptance #Jonas Nygren
+  Scenario: Verify navigation elements
+    Given I am on the about page
+    Then I have section should contain a heading with text "About The Shop"
+    Then I Section have text with informative text
+    Then Have button have text
