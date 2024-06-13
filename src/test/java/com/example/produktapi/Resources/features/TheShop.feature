@@ -95,4 +95,5 @@ Feature: The Shop
     Given I am on the about page
     Then I have section should contain a heading with text "About The Shop"
     Then I Section have text with informative text
-    Then Have button have text
+    Then I have button have text "To all products"
+    Then I navigate to products when click on button "To all products"

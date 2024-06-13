@@ -330,7 +330,17 @@ public class StepDefinition {
                 "At The Shop, we are dedicated to providing our customers with an exceptional shopping experience, from seamless navigation to prompt delivery and stellar customer service. Shop with confidence and discover the perfect blend of fashion, technology, and elegance at The Shop!", aboutp.getText());
     }
 
-    @Then("Have button have text")
-    public void haveButtonHaveText() {
+    @Then("I have button have text {string}")
+    public void iHaveButtonHaveText(String arg0) {
+        WebElement aboutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div div button")));
+        Assertions.assertEquals(arg0, aboutButton.getText());
+    }
+
+    @Then("I navigate to products when click on button {string}")
+    public void iNavigateToProductsWhenClickOnButton(String arg0) {
+        WebElement aboutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div div button")));
+        aboutButton.click();
+        String url = driver.getCurrentUrl();
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products.html", url, "URL does not match");
     }
 }
