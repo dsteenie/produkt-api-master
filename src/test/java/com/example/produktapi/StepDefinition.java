@@ -19,7 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StepDefinition {
 
@@ -334,5 +334,24 @@ public class StepDefinition {
     public void iHaveButtonHaveText(String arg0) {
         WebElement aboutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div div button")));
         Assertions.assertEquals(arg0, aboutButton.getText());
+    }
+
+    //Presentation text on homepage - Deborah
+    @Then("I should see the headline {string}")
+    public void i_should_see_the_headline(String expectedHeadline) {
+        WebElement headlineElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h2.display-4")));
+        String actualHeadline = headlineElement.getText().trim();
+        assertEquals(expectedHeadline, actualHeadline);
+    }
+
+    @Then("I should see the description text {string}")
+    public void i_should_see_the_description_text(String expectedText) {
+        WebElement descriptionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.lead")));
+
+        String actualDescription = descriptionElement.getText().trim();
+        System.out.println("Actual description text: '" + actualDescription + "'");
+
+        assertTrue(actualDescription.contains(expectedText),
+                "Expected description text to contain: '" + expectedText + "', but found: '" + actualDescription + "'");
     }
 }
