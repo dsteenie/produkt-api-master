@@ -90,6 +90,16 @@ Feature: The Shop
     When I click on Electronics
     Then I see all products in Electronics
 
+              ##Verify total amount rounding in cart - Pierre Nilsson
+  @acceptance
+  Scenario: Verify total amount rounding in cart
+    Given I am on the shop pagepierre
+    When I add "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops" to the cart
+    And I add "Mens Casual Premium Slim Fit T-Shirts" to the cart
+    When I navigate to the checkout page
+    Then the total amount in the cart should be "$132.25"
+
+
   @acceptance #Jonas Nygren
   Scenario: Verify navigation elements
     Given I am on the about page
