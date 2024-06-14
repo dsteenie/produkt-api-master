@@ -6,18 +6,20 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StepDefinition {
 
@@ -114,6 +116,7 @@ public class StepDefinition {
         driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(2) > a")).click();
 
     }
+
     @When("I add Mens Cotton Jacket to the cart")
     public void i_add_mens_cotton_jacket_to_the_cart() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -122,6 +125,7 @@ public class StepDefinition {
         addToCardBotton.moveToElement(addtocart).click().perform();
 
     }
+
     @Then("I should see the product in the cart")
     public void i_should_see_the_product_in_the_cart() {
         WebElement checkOut = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/header/div/div/div/a")));
@@ -129,11 +133,12 @@ public class StepDefinition {
         driver.get(checkOutUrl);
 
     }
+
     @Then("the cart should have the item")
     public void the_cart_should_have_the_item() {
         WebElement cartCount = driver.findElement(By.xpath("//html/body/main/div[2]/div[1]/h4/span[2]"));
         String cartItemCount = cartCount.getText();
-        Assertions.assertEquals(cartItemCount,"1");
+        Assertions.assertEquals(cartItemCount, "1");
     }
 
     @When("I click on home") //Jonas Nygren
@@ -300,76 +305,53 @@ public class StepDefinition {
         }
     }
 
-    @Given("I am on the shop pagepierre")//Pierre
-    public void i_am_on_the_shop_pagepierre() {
-        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
-        Assertions.assertEquals("The Shop | Products", driver.getTitle(), "Title is not as expected");
+    @Given("^I am on the about page$") //Jonas Nygren
+    public void iAmOnTheAboutPage() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/about");
     }
 
-    @When("I add {string} to the cart")//Pierre
-    public void i_add_to_the_cart(String productName) {
-        wait.until((ExpectedCondition<Boolean>) wd ->
-                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
-
-        WebElement productElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[text()='" + productName + "']")));
-        Assertions.assertNotNull(productElement, "Product element not found: " + productName);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", productElement);
-
-        WebElement productButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[text()='" + productName + "']/following-sibling::button[contains(text(), 'Add to cart')]")));
-        Assertions.assertNotNull(productButton, "Add to cart button not found for product: " + productName);
-
-        try {
-            productButton.click();
-        } catch (ElementClickInterceptedException e) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", productButton);
-            productButton.click();
-        }
+    @Then("I have section should contain a heading with text {string}")
+    public void iHaveSectionShouldContainAHeadingWithText(String arg0) {
+        WebElement aboutHeading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5  div  h2")));
+        Assertions.assertEquals(arg0, aboutHeading.getText());
     }
 
-    @When("I navigate to the checkout page") //Pierre
-    public void i_navigate_to_the_checkout_page() {
-        WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/checkout'][@type='button']")));
-        Assertions.assertNotNull(checkoutButton, "Checkout button not found");
-
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkoutButton);
-
-        try {
-            checkoutButton.click();
-        } catch (ElementClickInterceptedException e) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkoutButton);
-            checkoutButton.click();
-        }
-
-        wait.until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
-
-        Assertions.assertEquals("The Shop | Checkout", driver.getTitle(), "Checkout page title is not as expected");
-        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", driver.getCurrentUrl(), "Checkout page URL is not as expected");
+    @Then("I Section have text with informative text")
+    public void iSectionHaveTextWithInformativeText() {
+        WebElement aboutp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div p")));
+        Assertions.assertEquals("Welcome to The Shop, your premier online destination for all things fashion, electronics, and jewelry! At The Shop, we pride ourselves on offering a curated selection of high-quality products to cater to your diverse needs and desires.\n" +
+                "\n" +
+                "Explore our extensive range of fashion, featuring stylish attire for every occasion. Whether you're gearing up for a formal event or a laid-back weekend, we've got you covered with the latest trends and timeless classics.\n" +
+                "\n" +
+                "Tech enthusiasts will be delighted by our assortment of cutting-edge electronics, including smartphones, laptops, tablets, and accessories. Stay connected and ahead of the curve with the latest gadgets from top brands in the industry.\n" +
+                "\n" +
+                "Elevate your style with our stunning jewelry pieces, carefully crafted to add a touch of glamour to any outfit. From delicate necklaces and sparkling earrings to sleek watches and bold bracelets, our jewelry collection offers something for every personality and preference.\n" +
+                "\n" +
+                "At The Shop, we are dedicated to providing our customers with an exceptional shopping experience, from seamless navigation to prompt delivery and stellar customer service. Shop with confidence and discover the perfect blend of fashion, technology, and elegance at The Shop!", aboutp.getText());
     }
 
-    @Then("the total amount in the cart should be {string}") //Pierre
-    public void the_total_amount_in_the_cart_should_be(String expectedTotal) {
-        try {
-            wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-            wait.until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+    @Then("I have button have text {string}")
+    public void iHaveButtonHaveText(String arg0) {
+        WebElement aboutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div div button")));
+        Assertions.assertEquals(arg0, aboutButton.getText());
+    }
 
-            Assertions.assertEquals("The Shop | Checkout", driver.getTitle(), "Checkout page title is not as expected");
-            Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", driver.getCurrentUrl(), "Checkout page URL is not as expected");
+    //Presentation text on homepage - Deborah
+    @Then("I should see the headline {string}")
+    public void i_should_see_the_headline(String expectedHeadline) {
+        WebElement headlineElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h2.display-4")));
+        String actualHeadline = headlineElement.getText().trim();
+        assertEquals(expectedHeadline, actualHeadline);
+    }
 
-            WebElement cartTotalElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@id='cartList']/li[3]/strong")));
-            Assertions.assertNotNull(cartTotalElement, "Cart total element not found");
-            String actualTotal = cartTotalElement.getText();
-            Assertions.assertEquals(expectedTotal, actualTotal, "The total amount in the cart is not correctly rounded.");
-            Assertions.assertTrue(actualTotal.matches("\\$\\d+\\.\\d{2}"), "The total amount is not rounded to two decimal places: " + actualTotal);
-        } catch (TimeoutException e) {
-            System.out.println("TimeoutException: Expected condition failed. Element not found within the specified timeout.");
-            System.out.println("Current URL: " + driver.getCurrentUrl());
-            System.out.println("Page Source: " + driver.getPageSource());
-            throw e;
-        } catch (Exception e) {
-            System.out.println("Exception occurred: " + e.getMessage());
-            System.out.println("Current URL: " + driver.getCurrentUrl());
-            System.out.println("Page Source: " + driver.getPageSource());
-            throw e;
-        }
+    @Then("I should see the description text {string}")
+    public void i_should_see_the_description_text(String expectedText) {
+        WebElement descriptionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.lead")));
+
+        String actualDescription = descriptionElement.getText().trim();
+        System.out.println("Actual description text: '" + actualDescription + "'");
+
+        assertTrue(actualDescription.contains(expectedText),
+                "Expected description text to contain: '" + expectedText + "', but found: '" + actualDescription + "'");
     }
 }

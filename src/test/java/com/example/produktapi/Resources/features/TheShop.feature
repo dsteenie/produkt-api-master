@@ -98,3 +98,17 @@ Feature: The Shop
     And I add "Mens Casual Premium Slim Fit T-Shirts" to the cart
     When I navigate to the checkout page
     Then the total amount in the cart should be "$132.25"
+
+
+  @acceptance #Jonas Nygren
+  Scenario: Verify navigation elements
+    Given I am on the about page
+    Then I have section should contain a heading with text "About The Shop"
+    Then I Section have text with informative text
+    Then I have button have text "To all products"
+
+    ##Presentation text on homepage - Deborah
+  @acceptance
+  Scenario: Verify updated presentation text on homepage
+    Then I should see the headline "This shop is all you need"
+    And I should see the description text "Welcome to The Shop, your premier online destination"
