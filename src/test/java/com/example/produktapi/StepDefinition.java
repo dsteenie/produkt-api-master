@@ -6,13 +6,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -353,5 +351,77 @@ public class StepDefinition {
 
         assertTrue(actualDescription.contains(expectedText),
                 "Expected description text to contain: '" + expectedText + "', but found: '" + actualDescription + "'");
+    }
+    @Given("I am on the shop pagepierre")//Pierre
+    public void i_am_on_the_shop_pagepierre() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
+        Assertions.assertEquals("The Shop | Products", driver.getTitle(), "Title is not as expected");
+    }
+
+    @When("I add {string} to the cart")//Pierre
+    public void i_add_to_the_cart(String productName) {
+        wait.until((ExpectedCondition<Boolean>) wd ->
+                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+
+        WebElement productElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[text()='" + productName + "']")));
+        Assertions.assertNotNull(productElement, "Product element not found: " + productName);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", productElement);
+
+        WebElement productButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[text()='" + productName + "']/following-sibling::button[contains(text(), 'Add to cart')]")));
+        Assertions.assertNotNull(productButton, "Add to cart button not found for product: " + productName);
+
+        try {
+            productButton.click();
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", productButton);
+            productButton.click();
+        }
+    }
+
+    @When("I navigate to the checkout page") //Pierre
+    public void i_navigate_to_the_checkout_page() {
+        WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/checkout'][@type='button']")));
+        Assertions.assertNotNull(checkoutButton, "Checkout button not found");
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkoutButton);
+
+        try {
+            checkoutButton.click();
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkoutButton);
+            checkoutButton.click();
+        }
+
+        wait.until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+
+        Assertions.assertEquals("The Shop | Checkout", driver.getTitle(), "Checkout page title is not as expected");
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", driver.getCurrentUrl(), "Checkout page URL is not as expected");
+    }
+
+    @Then("the total amount in the cart should be {string}") //Pierre
+    public void the_total_amount_in_the_cart_should_be(String expectedTotal) {
+        try {
+            wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+            wait.until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+
+            Assertions.assertEquals("The Shop | Checkout", driver.getTitle(), "Checkout page title is not as expected");
+            Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", driver.getCurrentUrl(), "Checkout page URL is not as expected");
+
+            WebElement cartTotalElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@id='cartList']/li[3]/strong")));
+            Assertions.assertNotNull(cartTotalElement, "Cart total element not found");
+            String actualTotal = cartTotalElement.getText();
+            Assertions.assertEquals(expectedTotal, actualTotal, "The total amount in the cart is not correctly rounded.");
+            Assertions.assertTrue(actualTotal.matches("\\$\\d+\\.\\d{2}"), "The total amount is not rounded to two decimal places: " + actualTotal);
+        } catch (TimeoutException e) {
+            System.out.println("TimeoutException: Expected condition failed. Element not found within the specified timeout.");
+            System.out.println("Current URL: " + driver.getCurrentUrl());
+            System.out.println("Page Source: " + driver.getPageSource());
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Exception occurred: " + e.getMessage());
+            System.out.println("Current URL: " + driver.getCurrentUrl());
+            System.out.println("Page Source: " + driver.getPageSource());
+            throw e;
+        }
     }
 }
