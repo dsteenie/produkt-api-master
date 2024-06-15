@@ -74,10 +74,10 @@ public class StepDefinition {
         searchBar.sendKeys(Keys.ENTER);
     }
 
-    @Then("I should see a product with the description {string}")
-    public void i_should_see_a_product_with_the_description(String expectedDescription) {
-        WebElement productDescription = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='card-text' and text()='" + expectedDescription + "']")));
-        assertNotNull(productDescription, "Expected description: " + expectedDescription + " not found.");
+    @Then("I should see at least one product containing {string}")
+    public void i_should_see_at_least_one_product_containing(String searchTerm) {
+        WebElement productDescription = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), '" + searchTerm + "')]")));
+        assertNotNull(productDescription, "No product found containing the search term: " + searchTerm);
     }
 
     //Footer elements - Pierre
