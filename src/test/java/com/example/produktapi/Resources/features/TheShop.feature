@@ -142,3 +142,15 @@ Feature: The Shop
     When I click on the About link in the footer
     Then I should be redirected to the About page
     And the URL should match "https://webshop-agil-testautomatiserare.netlify.app/about"
+
+    ## Ali Kazem Mahdey
+  ## Check the update title for shop,about and checkout
+  @acceptance
+  Scenario: Check the Title for shop,about and checkout
+    Given I am on the shop page
+    When I click on shop page
+    Then  Title must be Products
+    When I click on about
+    Then Title must be About
+    When I click Checkout
+    Then Title must be Checkout
