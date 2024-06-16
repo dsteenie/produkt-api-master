@@ -126,3 +126,19 @@ Feature: The Shop
   Scenario: Verify updated presentation text on homepage
     Then I should see the headline "This shop is all you need"
     And I should see the description text "Welcome to The Shop, your premier online destination"
+
+    ## Verify new link to About page in main menu - Deborah
+  @acceptance
+  Scenario: Navigate to About page from main menu
+    Given I am on the homepage
+    When I click on the About link in the main menu
+    Then I should be redirected to the About page
+    And the URL should match "https://webshop-agil-testautomatiserare.netlify.app/about"
+
+    ## Verify new link to About page in footer - Deborah
+  @acceptance
+  Scenario: Navigate to About page from footer
+    Given I am on the homepage
+    When I click on the About link in the footer
+    Then I should be redirected to the About page
+    And the URL should match "https://webshop-agil-testautomatiserare.netlify.app/about"
