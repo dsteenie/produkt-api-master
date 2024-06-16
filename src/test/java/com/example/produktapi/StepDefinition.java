@@ -74,10 +74,10 @@ public class StepDefinition {
         searchBar.sendKeys(Keys.ENTER);
     }
 
-    @Then("I should see a product with the description {string}")
-    public void i_should_see_a_product_with_the_description(String expectedDescription) {
-        WebElement productDescription = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='card-text' and text()='" + expectedDescription + "']")));
-        assertNotNull(productDescription, "Expected description: " + expectedDescription + " not found.");
+    @Then("I should see at least one product containing {string}")
+    public void i_should_see_at_least_one_product_containing(String searchTerm) {
+        WebElement productDescription = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), '" + searchTerm + "')]")));
+        assertNotNull(productDescription, "No product found containing the search term: " + searchTerm);
     }
 
     //Footer elements - Pierre
@@ -334,24 +334,7 @@ public class StepDefinition {
         Assertions.assertEquals(arg0, aboutButton.getText());
     }
 
-    //Presentation text on homepage - Deborah
-    @Then("I should see the headline {string}")
-    public void i_should_see_the_headline(String expectedHeadline) {
-        WebElement headlineElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h2.display-4")));
-        String actualHeadline = headlineElement.getText().trim();
-        assertEquals(expectedHeadline, actualHeadline);
-    }
 
-    @Then("I should see the description text {string}")
-    public void i_should_see_the_description_text(String expectedText) {
-        WebElement descriptionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.lead")));
-
-        String actualDescription = descriptionElement.getText().trim();
-        System.out.println("Actual description text: '" + actualDescription + "'");
-
-        assertTrue(actualDescription.contains(expectedText),
-                "Expected description text to contain: '" + expectedText + "', but found: '" + actualDescription + "'");
-    }
     @Given("I am on the shop pagepierre")//Pierre
     public void i_am_on_the_shop_pagepierre() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
@@ -424,4 +407,50 @@ public class StepDefinition {
             throw e;
         }
     }
+
+    //Presentation text on homepage - Deborah
+    @Then("I should see the headline {string}")
+    public void i_should_see_the_headline(String expectedHeadline) {
+        WebElement headlineElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h2.display-4")));
+        String actualHeadline = headlineElement.getText().trim();
+        assertEquals(expectedHeadline, actualHeadline);
+    }
+
+    @Then("I should see the description text {string}")
+    public void i_should_see_the_description_text(String expectedText) {
+        WebElement descriptionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.lead")));
+
+        String actualDescription = descriptionElement.getText().trim();
+        System.out.println("Actual description text: '" + actualDescription + "'");
+
+        assertTrue(actualDescription.contains(expectedText),
+                "Expected description text to contain: '" + expectedText + "', but found: '" + actualDescription + "'");
+    }
+
+    // Verify new link to About page in main menu - Deborah
+    @When("I click on the About link in the main menu")
+    public void i_click_on_the_about_link_in_the_main_menu() {
+        WebElement aboutNav = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("header div div ul li:nth-child(3)")));
+        aboutNav.click();
+    }
+
+    @Then("I should be redirected to the About page")
+    public void i_should_be_redirected_to_the_about_page() {
+        String currentUrl = driver.getCurrentUrl();
+        Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/about", currentUrl);
+    }
+
+    @Then("the URL should match {string}")
+    public void the_url_should_match(String expectedUrl) {
+        String currentUrl = driver.getCurrentUrl();
+        Assertions.assertEquals(expectedUrl, currentUrl);
+    }
+
+    // Verify new link to About page in footer - Deborah
+    @When("I click on the About link in the footer")
+    public void i_click_on_the_about_link_in_the_footer() {
+        WebElement aboutFooterLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("footer .nav-item a[href='/about']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", aboutFooterLink);
+    }
+
 }

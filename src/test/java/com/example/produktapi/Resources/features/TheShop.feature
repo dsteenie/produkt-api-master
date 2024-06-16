@@ -9,13 +9,27 @@ Feature: The Shop
       ## When user checks page title - Natalia
     Then title is "The Shop"
 
-    ##Search functionality - Deborah
-    @acceptance
-  Scenario: User searches for a product by name
+##Search functionality - Deborah
+  @acceptance
+  Scenario: User searches for a product by name with mixed case
     Given I am on the shop page
-    When I enter "Jacket" into the search bar
+    When I enter "JaCkEt" into the search bar
     And I press Enter
-    Then I should see a product with the description "Bomullsjacka, vad finns det mer att säga?!"
+    Then I should see at least one product containing "jacka"
+
+  @acceptance
+  Scenario: User searches for a different product by name
+    Given I am on the shop page
+    When I enter "T-shirt" into the search bar
+    And I press Enter
+    Then I should see at least one product containing "t-shirt"
+
+  @acceptance
+  Scenario: User searches for a product by name with lowercase
+    Given I am on the shop page
+    When I enter "jacket" into the search bar
+    And I press Enter
+    Then I should see at least one product containing "jacka"
 
       ##Footer elements - Pierre Nilsson
   @acceptance
@@ -112,3 +126,19 @@ Feature: The Shop
   Scenario: Verify updated presentation text on homepage
     Then I should see the headline "This shop is all you need"
     And I should see the description text "Welcome to The Shop, your premier online destination"
+
+    ## Verify new link to About page in main menu - Deborah
+  @acceptance
+  Scenario: Navigate to About page from main menu
+    Given I am on the homepage
+    When I click on the About link in the main menu
+    Then I should be redirected to the About page
+    And the URL should match "https://webshop-agil-testautomatiserare.netlify.app/about"
+
+    ## Verify new link to About page in footer - Deborah
+  @acceptance
+  Scenario: Navigate to About page from footer
+    Given I am on the homepage
+    When I click on the About link in the footer
+    Then I should be redirected to the About page
+    And the URL should match "https://webshop-agil-testautomatiserare.netlify.app/about"
