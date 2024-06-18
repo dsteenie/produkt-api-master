@@ -9,27 +9,18 @@ Feature: The Shop
       ## When user checks page title - Natalia
     Then title is "The Shop"
 
-##Search functionality - Deborah
+## Search functionality - Deborah Steenie
   @acceptance
-  Scenario: User searches for a product by name with mixed case
+  Scenario Outline: User searches for a product by name
     Given I am on the shop page
-    When I enter "JaCkEt" into the search bar
-    And I press Enter
-    Then I should see at least one product containing "jacka"
+    When I enter "<product_name>" into the search bar
+    Then I should see at least one product containing "<expected_result>"
 
-  @acceptance
-  Scenario: User searches for a different product by name
-    Given I am on the shop page
-    When I enter "T-shirt" into the search bar
-    And I press Enter
-    Then I should see at least one product containing "t-shirt"
-
-  @acceptance
-  Scenario: User searches for a product by name with lowercase
-    Given I am on the shop page
-    When I enter "jacket" into the search bar
-    And I press Enter
-    Then I should see at least one product containing "jacka"
+    Examples:
+      | product_name | expected_result |
+      | JaCkEt       | jacka           |
+      | T-shirt      | t-shirt         |
+      | jacket       | jacka           |
 
       ##Footer elements - Pierre Nilsson
   @acceptance
@@ -154,3 +145,16 @@ Feature: The Shop
     Then  The Title should be The Shop | About
     When  I click Checkout
     Then  The Title should be The Shop | Checkout
+
+    ## Remove item from cart and verify updates - Deborah Steenie
+  @acceptance
+  Scenario: Remove an item from the cart and verify updates
+    Given I am on the shop page
+    When I add "Mens Cotton Jacket" to the cart
+    And I add "Mens Casual Premium Slim Fit T-Shirts" to the cart
+    And I add "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops" to the cart
+    And I navigate to the checkout page
+    When I remove "Mens Cotton Jacket" from the cart
+    Then the cart should have 2 items
+    And the cart total amount should be "$132.25"
+    And the checkout button in the header should display 2 items

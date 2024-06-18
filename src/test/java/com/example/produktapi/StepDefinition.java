@@ -68,12 +68,6 @@ public class StepDefinition {
         searchBar.sendKeys(searchQuery);
     }
 
-    @When("I press Enter")
-    public void i_press_enter() {
-        WebElement searchBar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search")));
-        searchBar.sendKeys(Keys.ENTER);
-    }
-
     @Then("I should see at least one product containing {string}")
     public void i_should_see_at_least_one_product_containing(String searchTerm) {
         WebElement productDescription = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), '" + searchTerm + "')]")));
@@ -485,5 +479,32 @@ public class StepDefinition {
 
     }
 
+    //Remove item from cart and verify updates - Deborah Steenie
+    @When("I remove {string} from the cart")
+    public void i_remove_from_the_cart(String productName) {
+        WebElement removeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h6[text()='" + productName + "']/following-sibling::button[contains(text(), 'Remove')]")));
+        removeButton.click();
+    }
+
+    @Then("the cart should have {int} items")
+    public void the_cart_should_have_items(int expectedItemCount) {
+        WebElement cartSizeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cartSize")));
+        int actualItemCount = Integer.parseInt(cartSizeElement.getText());
+        Assertions.assertEquals(expectedItemCount, actualItemCount, "Cart size does not match the expected value.");
+    }
+
+    @Then("the cart total amount should be {string}")
+    public void the_cart_total_amount_should_be(String expectedTotal) {
+        WebElement totalAmountElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='list-group-item d-flex justify-content-between']/strong")));
+        String actualTotal = totalAmountElement.getText();
+        Assertions.assertEquals(expectedTotal, actualTotal, "Total amount does not match the expected value.");
+    }
+
+    @Then("the checkout button in the header should display {int} items")
+    public void the_checkout_button_in_the_header_should_display_items(int expectedItemCount) {
+        WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.btn.btn-warning span.badge")));
+        int actualItemCount = Integer.parseInt(checkoutButton.getText());
+        Assertions.assertEquals(expectedItemCount, actualItemCount, "Checkout button item count does not match the expected value.");
+    }
 
 }
