@@ -148,9 +148,9 @@ Feature: The Shop
   @acceptance
   Scenario: Check the Title for shop,about and checkout
     Given I am on the shop page
-    When I click on shop page
-    Then  Title must be Products
-    When I click on about
-    Then Title must be About
-    When I click Checkout
-    Then Title must be Checkout
+    When  I click on Shop page
+    Then  The Title should be The Shop | Products
+    When  I click on About
+    Then  The Title should be The Shop | About
+    When  I click Checkout
+    Then  The Title should be The Shop | Checkout
