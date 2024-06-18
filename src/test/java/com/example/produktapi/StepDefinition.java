@@ -453,4 +453,37 @@ public class StepDefinition {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", aboutFooterLink);
     }
 
+    //Ali Kazem Mahdy
+    // Check the update title for shop,about and checkout
+    @When("I click on Shop page")
+    public void i_click_on_shop_page() {
+        driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(2) > a")).click();
+
+    }
+    @Then("The Title should be The Shop | Products")
+    public void the_title_should_be_the_shop_products() {
+        String titleShop = driver.getTitle();
+        Assertions.assertEquals(titleShop,"The Shop | Products");
+    }
+    @When("I click on About")
+    public void i_click_on_about() {
+        driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(3) > a")).click();
+    }
+    @Then("The Title should be The Shop | About")
+    public void the_title_should_be_the_shop_about() {
+        String titleAbout = driver.getTitle();
+        Assertions.assertEquals(titleAbout, "The Shop | About");;
+    }
+    @When("I click Checkout")
+    public void i_click_checkout() {
+        driver.findElement(By.cssSelector("body > header > div > div > div > a")).click();
+    }
+    @Then("The Title should be The Shop | Checkout")
+    public void the_title_should_be_the_shop_checkout() {
+        String titleCheckOut = driver.getTitle();
+        Assertions.assertEquals(titleCheckOut,"The Shop | Checkout");
+
+    }
+
+
 }
