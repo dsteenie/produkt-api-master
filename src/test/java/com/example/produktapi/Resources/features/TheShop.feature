@@ -158,3 +158,28 @@ Feature: The Shop
     Then the cart should have 2 items
     And the cart total amount should be "$132.25"
     And the checkout button in the header should display 2 items
+
+    ##Jonas Nygren
+  Scenario: Validate billing address
+    Given I am on the homepage
+    And I navigate to the checkout page
+    When I write First name "Test"
+    When I write Last name "Testson"
+    When I write Email "Testson@test.se"
+    When I write Address "Test gatan 1"
+    When I write Country "Test landet"
+    When I write City "Test staden"
+    When I write Zip "57754"
+
+
+  Scenario: Validate billing address with empty string give error message
+    Given I am on the homepage
+    And I navigate to the checkout page
+    When I write First name ""
+    When I write Last name ""
+    When I write Email ""
+    When I write Address ""
+    When I write Country ""
+    When I write City ""
+    When I write Zip ""
+    Then I Vailidate error messages

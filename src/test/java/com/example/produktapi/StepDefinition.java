@@ -507,4 +507,45 @@ public class StepDefinition {
         Assertions.assertEquals(expectedItemCount, actualItemCount, "Checkout button item count does not match the expected value.");
     }
 
+    @When("I write First name {string}")
+    public void iWriteFirstName(String arg0) {
+        driver.findElement(By.id("#firstName")).sendKeys(arg0);
+    }
+
+    @When("I write Last name {string}")
+    public void iWriteLastName(String arg0) {
+        driver.findElement(By.id("#lastName")).sendKeys(arg0);
+    }
+
+    @When("I write Email {string}")
+    public void iWriteEmail(String arg0) {
+        driver.findElement(By.id("#email")).sendKeys(arg0);
+    }
+
+    @When("I write Address {string}")
+    public void iWriteAddress(String arg0) {
+        driver.findElement(By.id("#address")).sendKeys(arg0);
+    }
+
+    @When("I write Country {string}")
+    public void iWriteCountry(String arg0) {
+        driver.findElement(By.id("#country")).sendKeys(arg0);
+    }
+
+    @When("I write City {string}")
+    public void iWriteCity(String arg0) {
+        driver.findElement(By.id("#city")).sendKeys(arg0);
+    }
+
+    @When("I write Zip {string}")
+    public void iWriteZip(String arg0) {
+        driver.findElement(By.id("#zip")).sendKeys(arg0);
+    }
+
+    @Then("I Vailidate error messages")
+    public void iVailidateErrorMessages() {
+        // First name
+        WebElement errorFirstName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(1) > div")));
+        Assertions.assertEquals("", errorFirstName.getText());
+    }
 }
