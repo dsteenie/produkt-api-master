@@ -176,6 +176,7 @@ Feature: The Shop
     When I write Country "Test landet"
     When I write City "Test staden"
     When I write Zip "57754"
+    When I Click on Button Continue to checkout
 
 
   Scenario: Validate billing address with empty string give error message
@@ -188,4 +189,5 @@ Feature: The Shop
     When I write Country ""
     When I write City ""
     When I write Zip ""
+    When I Click on Button Continue to checkout
     Then I Vailidate error messages
