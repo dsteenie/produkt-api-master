@@ -112,3 +112,58 @@ Feature: The Shop
   Scenario: Verify updated presentation text on homepage
     Then I should see the headline "This shop is all you need"
     And I should see the description text "Welcome to The Shop, your premier online destination"
+
+    ##Paypal payment method - Pierre Nilsson
+  Scenario: Verify total amount in cart after adding items and navigating to checkout
+    Given I am on the shop page
+    When I add "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops" to the cart
+    And I add "Mens Casual Premium Slim Fit T-Shirts" to the cart
+    When I navigate to the checkout page
+    Then the total amount in the cart should be "$132.25"
+    When I select PayPal as the payment method
+    Then the credit card fields should be hidden
+    And the PayPal message should be visible
+    When I select Credit card as the payment method
+    Then the credit card fields should be visible
+    And the PayPal message should be hidden
+
+    ## Verify new link to About page in main menu - Deborah
+  @acceptance
+  Scenario: Navigate to About page from main menu
+    Given I am on the homepage
+    When I click on the About link in the main menu
+    Then I should be redirected to the About page
+    And the URL should match "https://webshop-agil-testautomatiserare.netlify.app/about"
+
+    ## Verify new link to About page in footer - Deborah
+  @acceptance
+  Scenario: Navigate to About page from footer
+    Given I am on the homepage
+    When I click on the About link in the footer
+    Then I should be redirected to the About page
+    And the URL should match "https://webshop-agil-testautomatiserare.netlify.app/about"
+
+    ## Ali Kazem Mahdey
+  ## Check the update title for shop,about and checkout
+  @acceptance
+  Scenario: Check the Title for shop,about and checkout
+    Given I am on the shop page
+    When  I click on Shop page
+    Then  The Title should be The Shop | Products
+    When  I click on About
+    Then  The Title should be The Shop | About
+    When  I click Checkout
+    Then  The Title should be The Shop | Checkout
+
+    ## Remove item from cart and verify updates - Deborah Steenie
+  @acceptance
+  Scenario: Remove an item from the cart and verify updates
+    Given I am on the shop page
+    When I add "Mens Cotton Jacket" to the cart
+    And I add "Mens Casual Premium Slim Fit T-Shirts" to the cart
+    And I add "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops" to the cart
+    And I navigate to the checkout page
+    When I remove "Mens Cotton Jacket" from the cart
+    Then the cart should have 2 items
+    And the cart total amount should be "$132.25"
+    And the checkout button in the header should display 2 items
