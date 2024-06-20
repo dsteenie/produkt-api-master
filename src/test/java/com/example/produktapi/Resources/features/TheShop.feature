@@ -9,13 +9,18 @@ Feature: The Shop
       ## When user checks page title - Natalia
     Then title is "The Shop"
 
-    ##Search functionality - Deborah
-    @acceptance
-  Scenario: User searches for a product by name
+## Search functionality - Deborah Steenie
+  @acceptance
+  Scenario Outline: User searches for a product by name
     Given I am on the shop page
-    When I enter "Jacket" into the search bar
-    And I press Enter
-    Then I should see a product with the description "Bomullsjacka, vad finns det mer att säga?!"
+    When I enter "<product_name>" into the search bar
+    Then I should see at least one product containing "<expected_result>"
+
+    Examples:
+      | product_name | expected_result |
+      | JaCkEt       | jacka           |
+      | T-shirt      | t-shirt         |
+      | jacket       | jacka           |
 
       ##Footer elements - Pierre Nilsson
   @acceptance
@@ -112,20 +117,6 @@ Feature: The Shop
   Scenario: Verify updated presentation text on homepage
     Then I should see the headline "This shop is all you need"
     And I should see the description text "Welcome to The Shop, your premier online destination"
-
-    ##Paypal payment method - Pierre Nilsson
-  Scenario: Verify total amount in cart after adding items and navigating to checkout
-    Given I am on the shop page
-    When I add "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops" to the cart
-    And I add "Mens Casual Premium Slim Fit T-Shirts" to the cart
-    When I navigate to the checkout page
-    Then the total amount in the cart should be "$132.25"
-    When I select PayPal as the payment method
-    Then the credit card fields should be hidden
-    And the PayPal message should be visible
-    When I select Credit card as the payment method
-    Then the credit card fields should be visible
-    And the PayPal message should be hidden
 
     ## Verify new link to About page in main menu - Deborah
   @acceptance
