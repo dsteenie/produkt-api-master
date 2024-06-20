@@ -93,7 +93,7 @@ public class StepDefinition {
 
     @Then("the footer section should contain a link with text {string} and a blank URL {string}")
     public void the_footer_section_should_contain_a_link_with_text_and_a_blank_URL(String linkText,
-                                                                                   String expectedUrl) {
+            String expectedUrl) {
         WebElement footerLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(linkText)));
         String actualUrl = footerLink.getAttribute("href");
         String baseUrl = "https://webshop-agil-testautomatiserare.netlify.app";
@@ -226,10 +226,10 @@ public class StepDefinition {
         List<WebElement> productCards = driver.findElements(By.xpath("//main/div/div/img"));
         int numberOfProductElements = productCards.size();
         Assertions.assertEquals(40, numberOfProductElements); /*
-         * I will revise this assertion in next sprint. source kod
-         * in browser shows 20 items but I see 40 when code is
-         * downloaded
-         */
+                                                               * I will revise this assertion in next sprint. source kod
+                                                               * in browser shows 20 items but I see 40 when code is
+                                                               * downloaded
+                                                               */
     }
 
     @Given("I am on Shop page1") // Natalia
@@ -604,7 +604,7 @@ public class StepDefinition {
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(1) > div")));
         Assertions.assertEquals("4f", errorFirstName.getText());
 
-        //Lastname
+        // Lastname
         WebElement errorLastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(2) > div")));
         Assertions.assertEquals("4f", errorLastName.getText());
@@ -614,8 +614,18 @@ public class StepDefinition {
     @When("I Click on Button Continue to checkout")
     public void iClickOnButtonContinueToCheckout() {
 
-        driver.findElement(By.cssSelector("body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > button")).click();
+        driver.findElement(By.cssSelector("div.row.g-5 > div.col-md-7.col-lg-6 > form > button")).click();
+
+        // WebElement button = driver.findElement(By.cssSelector("body > main >
+        // div.row.g-5 > div.col-md-7.col-lg-6 > form > button"));
+        // button.click();
+
+        // WebElement button = driver.findElement(By.cssSelector("body > main >
+        // div.row.g-5 > div.col-md-7.col-lg-6 > form > button"));
+        // ((JavascriptExecutor)
+        // driver).executeScript("arguments[0].scrollIntoView(true);", button);
+        // button.click();
     }
-
-
+    // driver.findElement(By.cssSelector("body > main > div.row.g-5 >
+    // div.col-md-7.col-lg-6 > form > button")).click();
 }
