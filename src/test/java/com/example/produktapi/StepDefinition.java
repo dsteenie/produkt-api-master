@@ -697,7 +697,7 @@ public class StepDefinition {
     }
 
     @Then("I Check if border is green")
-    public void iCheckIfValidateValuesInFormIsValid() {
+    public void iCheckIfValidateValuesInFormIsValid() throws InterruptedException{
         Thread.sleep(5000);
 
         // First name
