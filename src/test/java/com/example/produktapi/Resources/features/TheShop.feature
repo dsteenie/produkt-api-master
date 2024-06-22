@@ -173,7 +173,7 @@ Feature: The Shop
     When I Click on Button Continue to checkout
     Then I Check if border is green
 
-
+    ## Jonas Nygren
   Scenario: Validate billing address with empty string give error message
     Given I am on the homepage
     And I navigate to the checkout page
