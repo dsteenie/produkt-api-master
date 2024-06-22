@@ -443,6 +443,7 @@ public class StepDefinition {
             throw e;
         }
     }
+
     @When("I select PayPal as the payment method")
     public void i_select_paypal_as_the_payment_method() {
         WebElement paypalRadio = wait.until(ExpectedConditions.elementToBeClickable(By.id("paypal")));
@@ -644,82 +645,107 @@ public class StepDefinition {
     }
 
     @Then("I Vailidate error messages and border is red")
-    public void iVailidateErrorMessages() {
+    public void iVailidateErrorMessages() throws InterruptedException {
+        Thread.sleep(5000);
         // First name
         WebElement errorFirstName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(1) > div")));
         Assertions.assertEquals("Valid first name is required.", errorFirstName.getText());
 
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("firstName")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("firstName")).getCssValue("border-color")); // red
+                                                                                                              // border
+                                                                                                              // color
+                                                                                                              // in
 
         // Lastname
         WebElement errorLastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(2) > div")));
         Assertions.assertEquals("Valid last name is required.", errorLastName.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("lastName")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("lastName")).getCssValue("border-color")); // red
+                                                                                                             // border
+                                                                                                             // color in
 
         // Email
-        WebElement errorEmail= wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+        WebElement errorEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(3) > div")));
         Assertions.assertEquals("Please enter a valid email address for shipping updates.", errorEmail.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("email")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("email")).getCssValue("border-color")); // red border
+                                                                                                          // color in
 
         // Address
         WebElement errorAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(4) > div")));
         Assertions.assertEquals("Please enter your shipping address.", errorAddress.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("address")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("address")).getCssValue("border-color")); // red
+                                                                                                            // border
+                                                                                                            // color in
 
         // Country
         WebElement errorCountry = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(5) > div")));
         Assertions.assertEquals("Please select a valid country.", errorCountry.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("country")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("country")).getCssValue("border-color")); // red
+                                                                                                            // border
+                                                                                                            // color in
 
         // City
         WebElement errorCity = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(6) > div")));
         Assertions.assertEquals("Please provide a valid state.", errorCity.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("city")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("city")).getCssValue("border-color")); // red border
+                                                                                                         // color in
 
         // zip
         WebElement errorZip = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(7) > div")));
         Assertions.assertEquals("Zip code required.", errorZip.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("zip")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("zip")).getCssValue("border-color")); // red border
+                                                                                                        // color in
 
     }
 
     @When("I Click on Button Continue to checkout")
     public void iClickOnButtonContinueToCheckout() {
-        WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Continue to checkout')]")));
+        WebElement checkoutButton = wait.until(ExpectedConditions
+                .elementToBeClickable(By.xpath("//button[contains(text(), 'Continue to checkout')]")));
         checkoutButton.submit();
     }
 
     @Then("I Check if border is green")
-    public void iCheckIfValidateValuesInFormIsValid() throws InterruptedException{
+    public void iCheckIfValidateValuesInFormIsValid() throws InterruptedException {
         Thread.sleep(5000);
 
         // First name
-        assertEquals("rgb(25, 135, 84)",  wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstName"))).getCssValue("border-color"));
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("firstName")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("firstName")).getCssValue("border-color")); // red
+                                                                                                              // border
+                                                                                                              // color
+                                                                                                              // in
 
         // Lastname
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("lastName")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("lastName")).getCssValue("border-color")); // red
+                                                                                                             // border
+                                                                                                             // color in
 
         // Email
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("email")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("email")).getCssValue("border-color")); // red border
+                                                                                                          // color in
 
         // Address
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("address")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("address")).getCssValue("border-color")); // red
+                                                                                                            // border
+                                                                                                            // color in
 
         // Country
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("country")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("country")).getCssValue("border-color")); // red
+                                                                                                            // border
+                                                                                                            // color in
 
         // City
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("city")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("city")).getCssValue("border-color")); // red border
+                                                                                                         // color in
 
         // zip
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("zip")).getCssValue("border-color")); // red border color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("zip")).getCssValue("border-color")); // red border
+                                                                                                        // color in
     }
 }
