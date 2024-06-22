@@ -95,14 +95,20 @@ Feature: The Shop
     When I click on Electronics
     Then I see all products in Electronics
 
-              ##Verify total amount rounding in cart - Pierre Nilsson
+              #Verify total amount rounding in cart with decimal and Toggling payment methods on the checkout page  - Pierre Nilsson
   @acceptance
-  Scenario: Verify total amount rounding in cart
+  Scenario: Verify total amount rounding in cart & Toggling payment methods on the checkout page
     Given I am on the shop pagepierre
     When I add "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops" to the cart
     And I add "Mens Casual Premium Slim Fit T-Shirts" to the cart
     When I navigate to the checkout page
     Then the total amount in the cart should be "$132.25"
+    When I select PayPal as the payment method
+    Then the credit card fields should be hidden
+    And the PayPal message should be visible
+    When I select Credit card as the payment method
+    Then the credit card fields should be visible
+    And the PayPal message should be hidden
 
 
   @acceptance #Jonas Nygren
