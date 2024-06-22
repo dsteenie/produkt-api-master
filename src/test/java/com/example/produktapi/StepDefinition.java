@@ -699,6 +699,7 @@ public class StepDefinition {
     @Then("I Check if border is green")
     public void iCheckIfValidateValuesInFormIsValid() {
         // First name
+        assertEquals("rgb(25, 135, 84)",  wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstName"))).getCssValue("border-color"));
         assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("firstName")).getCssValue("border-color")); // red border color in
 
         // Lastname
