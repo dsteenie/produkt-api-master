@@ -652,56 +652,44 @@ public class StepDefinition {
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(1) > div")));
         Assertions.assertEquals("Valid first name is required.", errorFirstName.getText());
 
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("firstName")).getCssValue("border-color")); // red
-                                                                                                              // border
-                                                                                                              // color
-                                                                                                              // in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("firstName")).getCssValue("border-color"));
+
 
         // Lastname
         WebElement errorLastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(2) > div")));
         Assertions.assertEquals("Valid last name is required.", errorLastName.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("lastName")).getCssValue("border-color")); // red
-                                                                                                             // border
-                                                                                                             // color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("lastName")).getCssValue("border-color"));
 
         // Email
         WebElement errorEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(3) > div")));
         Assertions.assertEquals("Please enter a valid email address for shipping updates.", errorEmail.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("email")).getCssValue("border-color")); // red border
-                                                                                                          // color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("email")).getCssValue("border-color"));
 
         // Address
         WebElement errorAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(4) > div")));
         Assertions.assertEquals("Please enter your shipping address.", errorAddress.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("address")).getCssValue("border-color")); // red
-                                                                                                            // border
-                                                                                                            // color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("address")).getCssValue("border-color"));
 
         // Country
         WebElement errorCountry = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(5) > div")));
         Assertions.assertEquals("Please select a valid country.", errorCountry.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("country")).getCssValue("border-color")); // red
-                                                                                                            // border
-                                                                                                            // color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("country")).getCssValue("border-color"));
 
         // City
         WebElement errorCity = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(6) > div")));
         Assertions.assertEquals("Please provide a valid state.", errorCity.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("city")).getCssValue("border-color")); // red border
-                                                                                                         // color in
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("city")).getCssValue("border-color"));
 
         // zip
         WebElement errorZip = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "body > main > div.row.g-5 > div.col-md-7.col-lg-6 > form > div.row.g-3 > div:nth-child(7) > div")));
         Assertions.assertEquals("Zip code required.", errorZip.getText());
-        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("zip")).getCssValue("border-color")); // red border
-                                                                                                        // color in
-
+        assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("zip")).getCssValue("border-color"));
     }
 
     @When("I Click on Button Continue to checkout")
@@ -716,36 +704,24 @@ public class StepDefinition {
         Thread.sleep(5000);
 
         // First name
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("firstName")).getCssValue("border-color")); // red
-                                                                                                              // border
-                                                                                                              // color
-                                                                                                              // in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("firstName")).getCssValue("border-color"));
 
         // Lastname
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("lastName")).getCssValue("border-color")); // red
-                                                                                                             // border
-                                                                                                             // color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("lastName")).getCssValue("border-color"));
 
         // Email
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("email")).getCssValue("border-color")); // red border
-                                                                                                          // color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("email")).getCssValue("border-color"));
 
         // Address
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("address")).getCssValue("border-color")); // red
-                                                                                                            // border
-                                                                                                            // color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("address")).getCssValue("border-color"));
 
         // Country
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("country")).getCssValue("border-color")); // red
-                                                                                                            // border
-                                                                                                            // color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("country")).getCssValue("border-color"));
 
         // City
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("city")).getCssValue("border-color")); // red border
-                                                                                                         // color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("city")).getCssValue("border-color"));
 
         // zip
-        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("zip")).getCssValue("border-color")); // red border
-                                                                                                        // color in
+        assertEquals("rgb(25, 135, 84)", driver.findElement(By.id("zip")).getCssValue("border-color"));
     }
 }
