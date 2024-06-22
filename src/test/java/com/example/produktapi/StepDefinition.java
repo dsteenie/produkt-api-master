@@ -401,6 +401,52 @@ public class StepDefinition {
             throw e;
         }
     }
+    @When("I select PayPal as the payment method")
+    public void i_select_paypal_as_the_payment_method() {
+        WebElement paypalRadio = wait.until(ExpectedConditions.elementToBeClickable(By.id("paypal")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", paypalRadio);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", paypalRadio);
+        System.out.println("PayPal radio button clicked");
+    }
+
+    @Then("the credit card fields should be hidden")
+    public void the_credit_card_fields_should_be_hidden() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("card")));
+        WebElement cardInfoSection = driver.findElement(By.id("card"));
+        assertTrue(!cardInfoSection.isDisplayed());
+        System.out.println("Credit card fields are hidden");
+    }
+
+    @Then("the PayPal message should be visible")
+    public void the_paypal_message_should_be_visible() {
+        WebElement paypalInfoSection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("paypalInfo")));
+        assertTrue(paypalInfoSection.isDisplayed());
+        System.out.println("PayPal message is visible");
+    }
+
+    @When("I select Credit card as the payment method")
+    public void i_select_credit_card_as_the_payment_method() {
+        WebElement creditCardRadio = wait.until(ExpectedConditions.elementToBeClickable(By.id("credit")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", creditCardRadio);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", creditCardRadio);
+        System.out.println("Credit card radio button clicked");
+    }
+
+    @Then("the credit card fields should be visible")
+    public void the_credit_card_fields_should_be_visible() {
+        WebElement cardInfoSection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("card")));
+        assertTrue(cardInfoSection.isDisplayed());
+        System.out.println("Credit card fields are visible");
+    }
+
+    @Then("the PayPal message should be hidden")
+    public void the_paypal_message_should_be_hidden() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("paypalInfo")));
+        WebElement paypalInfoSection = driver.findElement(By.id("paypalInfo"));
+        assertTrue(!paypalInfoSection.isDisplayed());
+        System.out.println("PayPal message is hidden");
+        driver.quit();
+    }
 
     //Presentation text on homepage - Deborah
     @Then("I should see the headline {string}")
