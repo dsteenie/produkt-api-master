@@ -172,7 +172,7 @@ fFeature: The Shop
     When I write Zip "57754"
     When I Click on Button Continue to checkout
 
-
+    ## Jonas Nygren
   Scenario: Validate billing address with empty string give error message
     Given I am on the homepage
     And I navigate to the checkout page
