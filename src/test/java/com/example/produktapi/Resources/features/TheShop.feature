@@ -177,6 +177,7 @@ Feature: The Shop
     When I write City "Test staden"
     When I write Zip "57754"
     When I Click on Button Continue to checkout
+    Then I Check if border is green
 
     ## Jonas Nygren
   Scenario: Validate billing address with empty string give error message
@@ -190,4 +191,4 @@ Feature: The Shop
     When I write City ""
     When I write Zip ""
     When I Click on Button Continue to checkout
-    Then I Vailidate error messages
+    Then I Vailidate error messages and border is red
