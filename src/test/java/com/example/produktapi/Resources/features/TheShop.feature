@@ -1,4 +1,4 @@
-fFeature: The Shop
+Feature: The Shop
 
   Background: The Shop is available in browser
     Given I am on the homepage
