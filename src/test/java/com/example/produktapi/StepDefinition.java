@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,6 +55,22 @@ public class StepDefinition {
     public void title_is(String expectedTitle) {
         String actualTitle = driver.getTitle();
         Assertions.assertEquals(expectedTitle, actualTitle);
+    }
+
+    //Page load time
+    long loadTime;
+
+    @When("I measure page load time")
+    public void I_measure_page_load_time() {
+        Instant start = Instant.now();
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/");
+        Instant finish = Instant.now();
+        loadTime = Duration.between(start, finish).toMillis();
+    }
+
+    @Then("Page is loaded within {int} milliseconds")
+    public void Page_is_loaded_within_seconds(int milliseconds) {
+        assertTrue(loadTime < milliseconds, "Page did not load within " + milliseconds + "milliseconds. Load time: " + loadTime + " milliseconds.");
     }
 
     // Search functionality - Deborah
@@ -222,31 +239,27 @@ public class StepDefinition {
 
     @Then("I see all products") // Natalia
     public void i_see_all_products() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         List<WebElement> productCards = driver.findElements(By.xpath("//main/div/div/img"));
         int numberOfProductElements = productCards.size();
-        Assertions.assertEquals(40, numberOfProductElements); /*
-                                                               * I will revise this assertion in next sprint. source kod
-                                                               * in browser shows 20 items but I see 40 when code is
-                                                               * downloaded
-                                                               */
+        Assertions.assertEquals(40, numberOfProductElements);
     }
 
     @Given("I am on Shop page1") // Natalia
     public void i_am_on_Shop_page1() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @When("I click on Mens clothing") // Natalia
     public void i_click_on_mens_clothing() throws InterruptedException {
         driver.findElement(By.xpath("//*/a[text()=\"Men's clothing\"]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @Then("I see all products in Mens") // Natalia
     public void i_see_all_products_in_Mens() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         List<WebElement> productCardButtons = driver
                 .findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
         for (WebElement button : productCardButtons) {
@@ -257,18 +270,18 @@ public class StepDefinition {
     @Given("I am on Shop page2") // Natalia
     public void i_am_on_Shop_page2() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @When("I click on Womens clothing") // Natalia
     public void i_click_on_Womens_clothing() throws InterruptedException {
         driver.findElement(By.xpath("//*/a[text()=\"Women's clothing\"]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @Then("I see all products in Womens") // Natalia
     public void i_see_all_products_in_Womens() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         List<WebElement> productCardButtons = driver
                 .findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
         for (WebElement button : productCardButtons) {
@@ -279,18 +292,18 @@ public class StepDefinition {
     @Given("I am on Shop page3") // Natalia
     public void i_am_on_Shop_page3() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @When("I click on Jewelery")
     public void i_click_on_jewelery() throws InterruptedException {
         driver.findElement(By.xpath("//*/a[text()=\"Jewelery\"]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @Then("I see all products in Jewelery") // Natalia
     public void i_see_all_products_in_Jewelery() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         List<WebElement> productCardButtons = driver
                 .findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
         for (WebElement button : productCardButtons) {
@@ -301,18 +314,18 @@ public class StepDefinition {
     @Given("I am on Shop page4") // Natalia
     public void i_am_on_Shop_page4() throws InterruptedException {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @When("I click on Electronics") // Natalia
     public void i_click_on_Electronics() throws InterruptedException {
         driver.findElement(By.xpath("//*/a[text()=\"Electronics\"]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @Then("I see all products in Electronics") // Natalia
     public void i_see_all_products_in_Electronics() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         List<WebElement> productCardButtons = driver
                 .findElements(By.xpath("//main/div/div/div[@class='card-body']/button"));
         for (WebElement button : productCardButtons) {
@@ -456,7 +469,7 @@ public class StepDefinition {
     public void the_credit_card_fields_should_be_hidden() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("card")));
         WebElement cardInfoSection = driver.findElement(By.id("card"));
-        assertTrue(!cardInfoSection.isDisplayed());
+        assertFalse(cardInfoSection.isDisplayed());
         System.out.println("Credit card fields are hidden");
     }
 
@@ -486,7 +499,7 @@ public class StepDefinition {
     public void the_paypal_message_should_be_hidden() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("paypalInfo")));
         WebElement paypalInfoSection = driver.findElement(By.id("paypalInfo"));
-        assertTrue(!paypalInfoSection.isDisplayed());
+        assertFalse(paypalInfoSection.isDisplayed());
         System.out.println("PayPal message is hidden");
         driver.quit();
     }

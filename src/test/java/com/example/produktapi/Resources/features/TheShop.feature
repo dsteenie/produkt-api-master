@@ -53,7 +53,7 @@ Feature: The Shop
 
          ## Navigation to Shop page - Natalia
 
- ## @acceptance - I comment out since this test is already made by NM above
+ ## @acceptance - I comment out this test since it is redundant - Natalia
  ## Scenario: Shop link in Top menu leads to product catalogue
    ## When I click on shop link
     ##Then Shop page is shown
@@ -63,7 +63,13 @@ Feature: The Shop
     When I click on button All products
     Then I see Shop page
 
-     ##Navigation inside Shop page - Natalia Molina
+    ## Page load time - Natalia
+  @acceptance
+  Scenario: Page load time
+    When I measure page load time
+    Then Page is loaded within 3000 milliseconds
+
+     ##Navigation inside Shop page - Natalia
 
   @acceptance
   Scenario: Filter all products
