@@ -57,10 +57,10 @@ public class StepDefinition {
         Assertions.assertEquals(expectedTitle, actualTitle);
     }
 
-    //Page load time
+    // Page load time - Natalia Molina
     long loadTime;
 
-    @When("I measure page load time")
+    @When("I measure page load time") //Natalia
     public void I_measure_page_load_time() {
         Instant start = Instant.now();
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/");
@@ -68,32 +68,32 @@ public class StepDefinition {
         loadTime = Duration.between(start, finish).toMillis();
     }
 
-    @Then("Page is loaded within {int} milliseconds")
+    @Then("Page is loaded within {int} milliseconds") //Natalia
     public void Page_is_loaded_within_seconds(int milliseconds) {
         assertTrue(loadTime < milliseconds, "Page did not load within " + milliseconds + "milliseconds. Load time: " + loadTime + " milliseconds.");
     }
 
-    // Search functionality - Deborah
-    @Given("I am on the shop page")
+    // Search functionality - Deborah Steenie
+    @Given("I am on the shop page") //Deborah
     public void i_am_on_the_shop_page() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
     }
 
-    @When("I enter {string} into the search bar")
+    @When("I enter {string} into the search bar") //Deborah
     public void i_enter_into_the_search_bar(String searchQuery) {
         WebElement searchBar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search")));
         searchBar.sendKeys(searchQuery);
     }
 
-    @Then("I should see at least one product containing {string}")
+    @Then("I should see at least one product containing {string}") //Deborah
     public void i_should_see_at_least_one_product_containing(String searchTerm) {
         WebElement productDescription = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), '" + searchTerm + "')]")));
         assertNotNull(productDescription, "No product found containing the search term: " + searchTerm);
     }
 
-    // Footer elements - Pierre
-    @Then("the footer section should contain the text {string}")
+    //Verify footer elements - Pierre Nilsson
+    @Then("the footer section should contain the text {string}") //Pierre
     public void the_footer_section_should_contain_the_text(String expectedText) {
         WebElement footerText = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("footer p.col-md-4.mb-0.text-muted")));
@@ -101,14 +101,14 @@ public class StepDefinition {
         Assertions.assertEquals(expectedText, actualText, "Footer text does not match.");
     }
 
-    @Then("the footer section should contain a link with text {string} and URL {string}")
+    @Then("the footer section should contain a link with text {string} and URL {string}") //Pierre
     public void the_footer_section_should_contain_a_link_with_text_and_URL(String linkText, String expectedUrl) {
         WebElement footerLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(linkText)));
         String actualUrl = footerLink.getAttribute("href");
         Assertions.assertTrue(actualUrl.contains(expectedUrl), "Footer link URL does not match.");
     }
 
-    @Then("the footer section should contain a link with text {string} and a blank URL {string}")
+    @Then("the footer section should contain a link with text {string} and a blank URL {string}") //Pierre
     public void the_footer_section_should_contain_a_link_with_text_and_a_blank_URL(String linkText,
             String expectedUrl) {
         WebElement footerLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(linkText)));
@@ -123,14 +123,14 @@ public class StepDefinition {
         }
     }
 
-    // add item to cart and check it-Ali Kazem Mahdy
-    @When("I navigate to the shop")
+    // Add item to cart and check it-Ali Kazem Mahdy
+    @When("I navigate to the shop") //ALi
     public void i_navigate_to_the_shop() {
         driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(2) > a")).click();
 
     }
 
-    @When("I add Mens Cotton Jacket to the cart")
+    @When("I add Mens Cotton Jacket to the cart") //Ali
     public void i_add_mens_cotton_jacket_to_the_cart() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement addtocart = wait
@@ -140,7 +140,7 @@ public class StepDefinition {
 
     }
 
-    @Then("I should see the product in the cart")
+    @Then("I should see the product in the cart") //Ali
     public void i_should_see_the_product_in_the_cart() {
         WebElement checkOut = wait
                 .until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/header/div/div/div/a")));
@@ -149,71 +149,56 @@ public class StepDefinition {
 
     }
 
-    @Then("the cart should have the item")
+    @Then("the cart should have the item") //Ali
     public void the_cart_should_have_the_item() {
         WebElement cartCount = driver.findElement(By.xpath("//html/body/main/div[2]/div[1]/h4/span[2]"));
         String cartItemCount = cartCount.getText();
         Assertions.assertEquals(cartItemCount, "1");
     }
 
-    @When("I click on home") // Jonas Nygren
+    //Verify navigation elements - Jonas Nygren
+    @When("I click on home") // Jonas
     public void iClickOnHome() {
         WebElement homeNav = wait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li:nth-child(1)")));
         homeNav.click();
     }
 
-    @Then("I should have navigated go to home") // Jonas Nygren
+    @Then("I should have navigated go to home") // Jonas
     public void iShouldGoToHome() {
         String url = driver.getCurrentUrl();
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/", url, "URL does not match");
     }
 
-    @When("I click on Shop") // Jonas Nygren
+    @When("I click on Shop") // Jonas
     public void iClickOnShop() {
         WebElement shopNav = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("header div div ul li:nth-child(2)")));
         shopNav.click();
     }
 
-    @Then("I should have navigated go to shop") // Jonas Nygren
+    @Then("I should have navigated go to shop") // Jonas
     public void iShouldGoToShop() {
         String url = driver.getCurrentUrl();
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/products", url,
                 "URL does not match");
     }
 
-    @When("I click on checkout") // Jonas Nygren
+    @When("I click on checkout") // Jonas
     public void iClickOnCheckout() {
         WebElement checkoutNav = wait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body header div div div a")));
         checkoutNav.click();
     }
 
-    @Then("I should have navigated go to checkout page") // Jonas Nygren
+    @Then("I should have navigated go to checkout page") // Jonas
     public void iShouldGoToCheckoutPage() {
         String url = driver.getCurrentUrl();
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/checkout", url,
                 "URL does not match");
     }
 
-    // Navigation from Home to Shop Page
-
-    /*
-     * @When("I click on shop link") Natalia: I commented out since there is already
-     * a test of this menu above by JN
-     * public void I_click_on_shop_link() {
-     * driver.findElement(By.xpath("//a[@href='/products']")).click();
-     * }
-     *
-     * @Then("Shop page is shown")
-     * public void Shop_page_is_shown() {
-     * String websiteUrl = driver.getCurrentUrl();
-     * Assertions.assertEquals(
-     * "https://webshop-agil-testautomatiserare.netlify.app/products", websiteUrl);
-     * }
-     */
-
+    // Verify button leads to Shop page - Natalia Molina
     @When("I click on button All products") // Natalia
     public void i_click_on_button_all_products() {
         driver.findElement(By.xpath("//*/button[text()='All products']")).click();
@@ -226,7 +211,6 @@ public class StepDefinition {
     }
 
     // Shop Page filtering menu - Natalia
-
     @Given("I am on Shop page") // Natalia
     public void i_am_on_Shop_page() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products#");
@@ -333,19 +317,20 @@ public class StepDefinition {
         }
     }
 
-    @Given("^I am on the about page$") // Jonas Nygren
+    // Verify navigation elements on about page - Jonas Nygren
+    @Given("^I am on the about page$") // Jonas
     public void iAmOnTheAboutPage() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/about");
     }
 
-    @Then("I have section should contain a heading with text {string}")
+    @Then("I have section should contain a heading with text {string}") //Jonas
     public void iHaveSectionShouldContainAHeadingWithText(String arg0) {
         WebElement aboutHeading = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5  div  h2")));
         Assertions.assertEquals(arg0, aboutHeading.getText());
     }
 
-    @Then("I Section have text with informative text")
+    @Then("I Section have text with informative text") //Jonas
     public void iSectionHaveTextWithInformativeText() {
         WebElement aboutp = wait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div p")));
@@ -366,13 +351,14 @@ public class StepDefinition {
                 aboutp.getText());
     }
 
-    @Then("I have button have text {string}")
+    @Then("I have button have text {string}") //Jonas
     public void iHaveButtonHaveText(String arg0) {
         WebElement aboutButton = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.cssSelector("body div.container.my-5 div div button")));
         Assertions.assertEquals(arg0, aboutButton.getText());
     }
 
+    //Verify total amount rounding in cart with decimal and Toggling payment methods on the checkout page  - Pierre Nilsson
     @Given("I am on the shop pagepierre") // Pierre
     public void i_am_on_the_shop_pagepierre() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
@@ -457,7 +443,7 @@ public class StepDefinition {
         }
     }
 
-    @When("I select PayPal as the payment method")
+    @When("I select PayPal as the payment method") //Pierre
     public void i_select_paypal_as_the_payment_method() {
         WebElement paypalRadio = wait.until(ExpectedConditions.elementToBeClickable(By.id("paypal")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", paypalRadio);
@@ -465,7 +451,7 @@ public class StepDefinition {
         System.out.println("PayPal radio button clicked");
     }
 
-    @Then("the credit card fields should be hidden")
+    @Then("the credit card fields should be hidden") //Pierre
     public void the_credit_card_fields_should_be_hidden() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("card")));
         WebElement cardInfoSection = driver.findElement(By.id("card"));
@@ -473,14 +459,14 @@ public class StepDefinition {
         System.out.println("Credit card fields are hidden");
     }
 
-    @Then("the PayPal message should be visible")
+    @Then("the PayPal message should be visible") //Pierre
     public void the_paypal_message_should_be_visible() {
         WebElement paypalInfoSection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("paypalInfo")));
         assertTrue(paypalInfoSection.isDisplayed());
         System.out.println("PayPal message is visible");
     }
 
-    @When("I select Credit card as the payment method")
+    @When("I select Credit card as the payment method") //Pierre
     public void i_select_credit_card_as_the_payment_method() {
         WebElement creditCardRadio = wait.until(ExpectedConditions.elementToBeClickable(By.id("credit")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", creditCardRadio);
@@ -488,14 +474,14 @@ public class StepDefinition {
         System.out.println("Credit card radio button clicked");
     }
 
-    @Then("the credit card fields should be visible")
+    @Then("the credit card fields should be visible") //Pierre
     public void the_credit_card_fields_should_be_visible() {
         WebElement cardInfoSection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("card")));
         assertTrue(cardInfoSection.isDisplayed());
         System.out.println("Credit card fields are visible");
     }
 
-    @Then("the PayPal message should be hidden")
+    @Then("the PayPal message should be hidden") //Pierre
     public void the_paypal_message_should_be_hidden() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("paypalInfo")));
         WebElement paypalInfoSection = driver.findElement(By.id("paypalInfo"));
@@ -505,7 +491,7 @@ public class StepDefinition {
     }
 
     // Presentation text on homepage - Deborah
-    @Then("I should see the headline {string}")
+    @Then("I should see the headline {string}") //Deborah
     public void i_should_see_the_headline(String expectedHeadline) {
         WebElement headlineElement = wait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h2.display-4")));
@@ -513,7 +499,7 @@ public class StepDefinition {
         assertEquals(expectedHeadline, actualHeadline);
     }
 
-    @Then("I should see the description text {string}")
+    @Then("I should see the description text {string}") //Deborah
     public void i_should_see_the_description_text(String expectedText) {
         WebElement descriptionElement = wait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.lead")));
@@ -526,64 +512,63 @@ public class StepDefinition {
     }
 
     // Verify new link to About page in main menu - Deborah
-    @When("I click on the About link in the main menu")
+    @When("I click on the About link in the main menu") //Deborah
     public void i_click_on_the_about_link_in_the_main_menu() {
         WebElement aboutNav = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("header div div ul li:nth-child(3)")));
         aboutNav.click();
     }
 
-    @Then("I should be redirected to the About page")
+    @Then("I should be redirected to the About page") //Deborah
     public void i_should_be_redirected_to_the_about_page() {
         String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("https://webshop-agil-testautomatiserare.netlify.app/about", currentUrl);
     }
 
-    @Then("the URL should match {string}")
+    @Then("the URL should match {string}") //Deborah
     public void the_url_should_match(String expectedUrl) {
         String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals(expectedUrl, currentUrl);
     }
 
     // Verify new link to About page in footer - Deborah
-    @When("I click on the About link in the footer")
+    @When("I click on the About link in the footer") //Deborah
     public void i_click_on_the_about_link_in_the_footer() {
         WebElement aboutFooterLink = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("footer .nav-item a[href='/about']")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", aboutFooterLink);
     }
 
-    // Ali Kazem Mahdy
-    // Check the update title for shop,about and checkout
-    @When("I click on Shop page")
+    // Check the update title for shop,about and checkout - Ali Kazem Mahdy
+    @When("I click on Shop page") //Ali
     public void i_click_on_shop_page() {
         driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(2) > a")).click();
 
     }
 
-    @Then("The Title should be The Shop | Products")
+    @Then("The Title should be The Shop | Products") //Ali
     public void the_title_should_be_the_shop_products() {
         String titleShop = driver.getTitle();
         Assertions.assertEquals(titleShop, "The Shop | Products");
     }
 
-    @When("I click on About")
+    @When("I click on About") //Ali
     public void i_click_on_about() {
         driver.findElement(By.cssSelector("body > header > div > div > ul > li:nth-child(3) > a")).click();
     }
 
-    @Then("The Title should be The Shop | About")
+    @Then("The Title should be The Shop | About") //Ali
     public void the_title_should_be_the_shop_about() {
         String titleAbout = driver.getTitle();
         Assertions.assertEquals(titleAbout, "The Shop | About");
     }
 
-    @When("I click Checkout")
+    @When("I click Checkout") //Ali
     public void i_click_checkout() {
         driver.findElement(By.cssSelector("body > header > div > div > div > a")).click();
     }
 
-    @Then("The Title should be The Shop | Checkout")
+    @Then("The Title should be The Shop | Checkout") //Ali
     public void the_title_should_be_the_shop_checkout() {
         String titleCheckOut = driver.getTitle();
         Assertions.assertEquals(titleCheckOut, "The Shop | Checkout");
@@ -591,21 +576,21 @@ public class StepDefinition {
     }
 
     // Remove item from cart and verify updates - Deborah Steenie
-    @When("I remove {string} from the cart")
+    @When("I remove {string} from the cart") //Deborah
     public void i_remove_from_the_cart(String productName) {
         WebElement removeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//h6[text()='" + productName + "']/following-sibling::button[contains(text(), 'Remove')]")));
         removeButton.click();
     }
 
-    @Then("the cart should have {int} items")
+    @Then("the cart should have {int} items") //Deborah
     public void the_cart_should_have_items(int expectedItemCount) {
         WebElement cartSizeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cartSize")));
         int actualItemCount = Integer.parseInt(cartSizeElement.getText());
         Assertions.assertEquals(expectedItemCount, actualItemCount, "Cart size does not match the expected value.");
     }
 
-    @Then("the cart total amount should be {string}")
+    @Then("the cart total amount should be {string}") //Deborah
     public void the_cart_total_amount_should_be(String expectedTotal) {
         WebElement totalAmountElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//li[@class='list-group-item d-flex justify-content-between']/strong")));
@@ -613,7 +598,7 @@ public class StepDefinition {
         Assertions.assertEquals(expectedTotal, actualTotal, "Total amount does not match the expected value.");
     }
 
-    @Then("the checkout button in the header should display {int} items")
+    @Then("the checkout button in the header should display {int} items") //Deborah
     public void the_checkout_button_in_the_header_should_display_items(int expectedItemCount) {
         WebElement checkoutButton = wait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.btn.btn-warning span.badge")));
@@ -622,42 +607,43 @@ public class StepDefinition {
                 "Checkout button item count does not match the expected value.");
     }
 
-    @When("I write First name {string}")
+    //Validate billing address - Jonas Nygren
+    @When("I write First name {string}") //Jonas
     public void iWriteFirstName(String arg0) {
         driver.findElement(By.id("firstName")).sendKeys(arg0);
     }
 
-    @When("I write Last name {string}")
+    @When("I write Last name {string}") //Jonas
     public void iWriteLastName(String arg0) {
         driver.findElement(By.id("lastName")).sendKeys(arg0);
     }
 
-    @When("I write Email {string}")
+    @When("I write Email {string}") //Jonas
     public void iWriteEmail(String arg0) {
         driver.findElement(By.id("email")).sendKeys(arg0);
     }
 
-    @When("I write Address {string}")
+    @When("I write Address {string}") //Jonas
     public void iWriteAddress(String arg0) {
         driver.findElement(By.id("address")).sendKeys(arg0);
     }
 
-    @When("I write Country {string}")
+    @When("I write Country {string}") //Jonas
     public void iWriteCountry(String arg0) {
         driver.findElement(By.id("country")).sendKeys(arg0);
     }
 
-    @When("I write City {string}")
+    @When("I write City {string}") //Jonas
     public void iWriteCity(String arg0) {
         driver.findElement(By.id("city")).sendKeys(arg0);
     }
 
-    @When("I write Zip {string}")
+    @When("I write Zip {string}") //Jonas
     public void iWriteZip(String arg0) {
         driver.findElement(By.id("zip")).sendKeys(arg0);
     }
 
-    @Then("I Vailidate error messages and border is red")
+    @Then("I Vailidate error messages and border is red") //Jonas
     public void iVailidateErrorMessages() throws InterruptedException {
         Thread.sleep(5000);
         // First name
@@ -705,14 +691,14 @@ public class StepDefinition {
         assertEquals("rgb(220, 53, 69)", driver.findElement(By.id("zip")).getCssValue("border-color"));
     }
 
-    @When("I Click on Button Continue to checkout")
+    @When("I Click on Button Continue to checkout") //Jonas
     public void iClickOnButtonContinueToCheckout() {
         WebElement checkoutButton = wait.until(ExpectedConditions
                 .elementToBeClickable(By.xpath("//button[contains(text(), 'Continue to checkout')]")));
         checkoutButton.submit();
     }
 
-    @Then("I Check if border is green")
+    @Then("I Check if border is green") //Jonas
     public void iCheckIfValidateValuesInFormIsValid() throws InterruptedException {
         Thread.sleep(5000);
 
