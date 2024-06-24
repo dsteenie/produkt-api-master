@@ -66,7 +66,6 @@ public class StepDefinition {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/");
         Instant finish = Instant.now();
         loadTime = Duration.between(start, finish).toMillis();
-        var test = 1;
     }
 
     @Then("Page is loaded within {int} milliseconds")
